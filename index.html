@@ -19,7 +19,6 @@ body {
   color: #2e2a24;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  min-height: 100vh;
 }
 
 .glass-card {
@@ -63,6 +62,8 @@ body {
 /* COVER AMPLOP */
 .cover-screen {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100vh;
   background: linear-gradient(135deg, #fef7e8 0%, #f3e5f5 100%);
@@ -82,6 +83,7 @@ body {
   position: relative;
   cursor: pointer;
   box-shadow: 0 30px 50px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
   animation: gentlePulse 1.5s infinite ease-in-out;
 }
 
@@ -98,7 +100,7 @@ body {
   background: linear-gradient(135deg, #e5c270, #c8a15e);
   clip-path: polygon(0 0, 100% 0, 50% 55%);
   transform-origin: top;
-  transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: transform 0.6s ease-out;
   z-index: 3;
   border-radius: 28px 28px 0 0;
 }
@@ -115,7 +117,7 @@ body {
   text-align: center;
   transform: translateY(100%);
   opacity: 0;
-  transition: transform 0.7s 0.2s, opacity 0.5s 0.1s;
+  transition: transform 0.5s 0.2s, opacity 0.4s 0.1s;
   border: 1px solid #d4af37;
 }
 
@@ -177,7 +179,6 @@ body {
   border: 2px solid rgba(212,175,55,0.5);
 }
 
-/* Galeri */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -196,7 +197,6 @@ body {
 }
 .gallery-img:hover { transform: scale(1.02); }
 
-/* Lightbox */
 .lightbox {
   position: fixed;
   top: 0;
@@ -216,7 +216,6 @@ body {
 .lightbox.active { visibility: visible; opacity: 1; }
 .lightbox img { max-width: 90%; max-height: 85%; border-radius: 24px; }
 
-/* Guestbook */
 .guestbook-list {
   max-height: 280px;
   overflow-y: auto;
@@ -240,7 +239,6 @@ body {
   font-family: inherit;
 }
 
-/* Gift */
 .gift-box { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 20px 0; }
 .gift-card {
   background: rgba(255,250,240,0.5);
@@ -396,101 +394,171 @@ body {
 <div class="music-player" id="musicBtn">🎵</div>
 
 <script>
-// ========== AMPLOP (PASTI BISA DIKLIK) ==========
-const cover = document.getElementById('coverScreen');
-const envelope = document.getElementById('envelope');
-const main = document.getElementById('mainContent');
-const audio = document.getElementById('weddingAudio');
+// ========== AMPLOP - PASTI JALAN ==========
+const coverScreen = document.getElementById('coverScreen');
+const envelopeCard = document.getElementById('envelope');
+const mainContent = document.getElementById('mainContent');
+const audioEl = document.getElementById('weddingAudio');
 const musicBtn = document.getElementById('musicBtn');
 let musicPlaying = false;
-let opened = false;
+let isOpened = false;
 
 function playMusic() {
-  if(!audio.paused) return;
-  audio.volume = 0;
-  audio.play().then(() => {
+  if (!audioEl.paused) return;
+  audioEl.volume = 0;
+  audioEl.play().then(() => {
     let vol = 0;
-    let iv = setInterval(() => { if(vol<0.5) { vol+=0.05; audio.volume=vol; } else clearInterval(iv); }, 80);
+    const interval = setInterval(() => {
+      if (vol < 0.5) {
+        vol += 0.05;
+        audioEl.volume = vol;
+      } else {
+        clearInterval(interval);
+      }
+    }, 80);
     musicPlaying = true;
     musicBtn.innerHTML = "🎶";
-  }).catch(() => { musicPlaying = false; musicBtn.innerHTML = "🎵"; });
+  }).catch(() => {
+    musicPlaying = false;
+    musicBtn.innerHTML = "🎵";
+  });
 }
 
-function toggleMusic() { audio.paused ? playMusic() : (audio.pause(), musicPlaying=false, musicBtn.innerHTML="🎵"); }
+function toggleMusic() {
+  if (audioEl.paused) {
+    playMusic();
+  } else {
+    audioEl.pause();
+    musicPlaying = false;
+    musicBtn.innerHTML = "🎵";
+  }
+}
 
-function openEnvelope() {
-  if(opened) return;
-  opened = true;
-  envelope.classList.add('open');
+function openInvitation() {
+  if (isOpened) return;
+  isOpened = true;
+  
+  // Buka amplop
+  envelopeCard.classList.add('open');
+  
+  // Confetti
   canvasConfetti({ particleCount: 120, spread: 60, origin: { y: 0.6 }, colors: ['#d4af37', '#b28bd0'] });
+  
+  // Putar musik
   playMusic();
+  
+  // Setelah animasi, tampilkan konten utama
   setTimeout(() => {
-    cover.style.display = 'none';
-    main.style.display = 'block';
+    coverScreen.style.display = 'none';
+    mainContent.style.display = 'block';
     document.body.style.overflow = 'auto';
+    // Trigger scroll reveal
     window.dispatchEvent(new Event('scroll'));
-  }, 800);
+  }, 700);
 }
 
-envelope.addEventListener('click', openEnvelope);
-musicBtn.addEventListener('click', (e) => { e.stopPropagation(); opened ? toggleMusic() : openEnvelope(); });
+// Event listener amplop
+envelopeCard.addEventListener('click', openInvitation);
+
+// Tombol musik
+musicBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  if (!isOpened) {
+    openInvitation();
+  } else {
+    toggleMusic();
+  }
+});
 
 // ========== COUNTDOWN ==========
 const targetDate = new Date("April 5, 2026 08:00:00").getTime();
 setInterval(() => {
   const now = new Date().getTime();
-  const d = targetDate - now;
-  if(d<0) { document.getElementById('days').innerText='00'; document.getElementById('hours').innerText='00'; document.getElementById('minutes').innerText='00'; document.getElementById('seconds').innerText='00'; return; }
-  document.getElementById('days').innerText = Math.floor(d/86400000).toString().padStart(2,'0');
-  document.getElementById('hours').innerText = Math.floor((d%86400000)/3600000).toString().padStart(2,'0');
-  document.getElementById('minutes').innerText = Math.floor((d%3600000)/60000).toString().padStart(2,'0');
-  document.getElementById('seconds').innerText = Math.floor((d%60000)/1000).toString().padStart(2,'0');
+  const diff = targetDate - now;
+  if (diff < 0) {
+    document.getElementById('days').innerText = '00';
+    document.getElementById('hours').innerText = '00';
+    document.getElementById('minutes').innerText = '00';
+    document.getElementById('seconds').innerText = '00';
+    return;
+  }
+  document.getElementById('days').innerText = Math.floor(diff / 86400000).toString().padStart(2, '0');
+  document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
+  document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+  document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
 }, 1000);
 
 // ========== GALERI ==========
-const gallery = [
-  "berdua.jpg", "cowo.jpg", "cewe.jpg", "berdua.jpg", "cowo.jpg", "cewe.jpg"
-];
+const galleryImages = ["berdua.jpg", "cowo.jpg", "cewe.jpg", "berdua.jpg", "cowo.jpg", "cewe.jpg"];
 const galleryGrid = document.getElementById('galleryGrid');
-gallery.forEach(src => {
+galleryImages.forEach(src => {
   const img = document.createElement('img');
   img.src = src;
   img.className = 'gallery-img';
   img.onerror = () => img.src = 'https://placehold.co/400x400/fef7e8/c8a15e?text=Foto';
-  img.onclick = () => { document.getElementById('lightboxImg').src = img.src; document.getElementById('lightbox').classList.add('active'); };
+  img.onclick = () => {
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightbox').classList.add('active');
+  };
   galleryGrid.appendChild(img);
 });
 
-function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
 window.closeLightbox = closeLightbox;
 
-// ========== GUESTBOOK (localStorage) ==========
+// ========== GUESTBOOK ==========
 let messages = [];
 function loadMessages() {
-  const saved = localStorage.getItem('wedding_messages');
-  if(saved) messages = JSON.parse(saved);
-  else messages = [{ name: "🌹 Keluarga", msg: "Selamat menempuh hidup baru, semoga sakinah!" }, { name: "✨ Sahabat", msg: "Happy wedding! Langgeng selalu." }];
+  const saved = localStorage.getItem('wedding_messages_fix');
+  if (saved) {
+    messages = JSON.parse(saved);
+  } else {
+    messages = [
+      { name: "🌹 Keluarga Besar", msg: "Selamat menempuh hidup baru, semoga sakinah mawaddah warahmah!" },
+      { name: "✨ Teman Sejati", msg: "Happy wedding! Langgeng selalu berdua 💕" }
+    ];
+  }
   renderMessages();
 }
 function renderMessages() {
   const container = document.getElementById('guestbookList');
-  if(!container) return;
-  container.innerHTML = messages.slice().reverse().map(m => `<div class="guestbook-item"><div class="guestbook-name">${escapeHtml(m.name)}</div><div class="guestbook-message">${escapeHtml(m.msg)}</div></div>`).join('');
-  localStorage.setItem('wedding_messages', JSON.stringify(messages));
+  if (!container) return;
+  container.innerHTML = messages.slice().reverse().map(m => `
+    <div class="guestbook-item">
+      <div class="guestbook-name">${escapeHtml(m.name)}</div>
+      <div class="guestbook-message">${escapeHtml(m.msg)}</div>
+    </div>
+  `).join('');
+  localStorage.setItem('wedding_messages_fix', JSON.stringify(messages));
 }
-function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+function escapeHtml(str) {
+  return str.replace(/[&<>]/g, function(m) {
+    if (m === '&') return '&amp;';
+    if (m === '<') return '&lt;';
+    if (m === '>') return '&gt;';
+    return m;
+  });
+}
 function addMessage() {
   const name = document.getElementById('guestName').value.trim();
   const msg = document.getElementById('guestMessage').value.trim();
-  if(!name || !msg) { alert('Isi nama dan ucapan dulu ya'); return; }
-  messages.push({ name: name.slice(0,30), msg: msg.slice(0,200) });
+  if (!name || !msg) {
+    alert('Isi nama dan ucapan dulu ya 😊');
+    return;
+  }
+  messages.push({ name: name.slice(0, 30), msg: msg.slice(0, 200) });
   renderMessages();
   document.getElementById('guestName').value = '';
   document.getElementById('guestMessage').value = '';
   alert('Terima kasih atas doa & ucapannya! 💛');
 }
 window.addMessage = addMessage;
-window.copyText = (t) => { navigator.clipboard.writeText(t); alert('Tersalin!'); };
+window.copyText = (text) => {
+  navigator.clipboard.writeText(text);
+  alert('Berhasil disalin!');
+};
 
 // ========== CALENDAR ==========
 document.getElementById('calendarBtn')?.addEventListener('click', (e) => {
@@ -503,30 +571,52 @@ document.getElementById('calendarBtn')?.addEventListener('click', (e) => {
 const sections = document.querySelectorAll('.section-card');
 const navLinks = document.querySelectorAll('.nav-link');
 function onScroll() {
-  let pos = window.scrollY + 120;
+  let scrollPos = window.scrollY + 120;
   sections.forEach(sec => {
-    if(pos >= sec.offsetTop && pos < sec.offsetTop + sec.offsetHeight) {
-      let id = sec.getAttribute('id');
-      navLinks.forEach(link => { link.classList.remove('active'); if(link.getAttribute('href').substring(1) === id) link.classList.add('active'); });
+    if (scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) {
+      const id = sec.getAttribute('id');
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === id) {
+          link.classList.add('active');
+        }
+      });
     }
   });
-  document.querySelectorAll('.reveal').forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight-80) el.classList.add('show'); });
+  document.querySelectorAll('.reveal').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight - 80) {
+      el.classList.add('show');
+    }
+  });
 }
 window.addEventListener('scroll', onScroll);
-window.addEventListener('load', () => { onScroll(); loadMessages(); });
-document.querySelectorAll('.nav-link').forEach(a => {
-  a.addEventListener('click', function(e) {
+window.addEventListener('load', () => {
+  onScroll();
+  loadMessages();
+});
+document.querySelectorAll('.nav-link').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
     e.preventDefault();
-    let target = document.getElementById(this.getAttribute('href').substring(1));
-    if(target) target.scrollIntoView({ behavior: 'smooth' });
+    const targetId = this.getAttribute('href').substring(1);
+    const targetEl = document.getElementById(targetId);
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: 'smooth' });
+    }
   });
 });
 
-// foto mempelai click ke lightbox
-document.getElementById('imgPria')?.addEventListener('click', () => { document.getElementById('lightboxImg').src = 'cowo.jpg'; document.getElementById('lightbox').classList.add('active'); });
-document.getElementById('imgWanita')?.addEventListener('click', () => { document.getElementById('lightboxImg').src = 'cewe.jpg'; document.getElementById('lightbox').classList.add('active'); });
+// Foto mempelai ke lightbox
+document.getElementById('imgPria')?.addEventListener('click', () => {
+  document.getElementById('lightboxImg').src = 'cowo.jpg';
+  document.getElementById('lightbox').classList.add('active');
+});
+document.getElementById('imgWanita')?.addEventListener('click', () => {
+  document.getElementById('lightboxImg').src = 'cewe.jpg';
+  document.getElementById('lightbox').classList.add('active');
+});
 
-main.style.display = 'none';
+// Sembunyikan main dulu
+mainContent.style.display = 'none';
 document.body.style.overflow = 'hidden';
 </script>
 </body>
