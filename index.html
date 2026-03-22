@@ -147,7 +147,7 @@ body {
   letter-spacing: 1px;
 }
 
-/* INSTRUKSI KLIK - DITARUH DI LUAR AMPLOP (SEKARANG BENER) */
+/* INSTRUKSI KLIK - DITARUH DI LUAR AMPLOP */
 .click-instruction-outer {
   text-align: center;
   background: rgba(0, 0, 0, 0.6);
@@ -279,27 +279,204 @@ h2 {
   transform: scale(1.02);
 }
 
-/* Galeri grid */
-.gallery-grid {
+/* ========== GALERI BARU - INTERAKTIF & MODERN ========== */
+.gallery-section {
+  background: rgba(30, 24, 18, 0.85);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(200, 169, 106, 0.6);
+  border-radius: 40px;
+  padding: 28px 24px;
+  margin: 20px 0;
+  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.4);
+}
+
+.gallery-title {
+  text-align: center;
+  font-size: 28px;
+  color: #dbbc7c;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 10px;
+}
+
+.gallery-sub {
+  text-align: center;
+  font-size: 13px;
+  color: #c8a96a;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+}
+
+/* Masonry-style grid */
+.gallery-masonry {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 16px;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
-.gallery-img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 20px;
-  border: 2px solid #c8a96a80;
-  transition: 0.25s;
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
   cursor: pointer;
+  aspect-ratio: 1 / 1;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 }
 
-.gallery-img:hover {
-  transform: scale(1.02);
-  border-color: #e7c27d;
+.gallery-item:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+.gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  padding: 15px 10px 8px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.gallery-item:hover .gallery-overlay {
+  transform: translateY(0);
+}
+
+.gallery-overlay span {
+  color: #e7c582;
+  font-size: 12px;
+  font-weight: 500;
+  background: rgba(0,0,0,0.5);
+  padding: 4px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+/* Item dengan ukuran berbeda untuk efek menarik */
+.gallery-item.large {
+  grid-column: span 2;
+  aspect-ratio: 2 / 1;
+}
+
+/* Lightbox Premium */
+.lightbox-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s ease;
+  z-index: 200;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+.lightbox-modal.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.lightbox-container {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 85vh;
+  border-radius: 28px;
+  box-shadow: 0 0 40px rgba(200,169,106,0.5);
+  transform: scale(0.95);
+  transition: transform 0.4s ease;
+}
+
+.lightbox-modal.active .lightbox-img {
+  transform: scale(1);
+}
+
+.lightbox-caption {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #e7c582;
+  font-size: 14px;
+  background: rgba(0,0,0,0.6);
+  padding: 8px;
+  border-radius: 30px;
+  width: fit-content;
+  margin: 0 auto;
+  backdrop-filter: blur(4px);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 40px;
+  color: #c8a96a;
+  cursor: pointer;
+  transition: 0.2s;
+  z-index: 201;
+  font-weight: 300;
+}
+
+.lightbox-close:hover {
+  transform: scale(1.1);
+  color: #e7c582;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 48px;
+  color: #c8a96a;
+  cursor: pointer;
+  background: rgba(0,0,0,0.4);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+  user-select: none;
+}
+
+.lightbox-nav:hover {
+  background: rgba(200,169,106,0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-nav.prev {
+  left: 20px;
+}
+
+.lightbox-nav.next {
+  right: 20px;
 }
 
 /* button */
@@ -360,42 +537,6 @@ h2 {
   background: #e0bc78;
 }
 
-/* lightbox premium */
-.lightbox-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.92);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.3s ease;
-  z-index: 200;
-  cursor: pointer;
-}
-
-.lightbox-modal.active {
-  visibility: visible;
-  opacity: 1;
-}
-
-.lightbox-img {
-  max-width: 90%;
-  max-height: 85%;
-  border-radius: 28px;
-  box-shadow: 0 0 30px rgba(200,169,106,0.4);
-  transform: scale(0.95);
-  transition: transform 0.3s;
-}
-
-.lightbox-modal.active .lightbox-img {
-  transform: scale(1);
-}
-
 /* animasi scroll reveal */
 .reveal {
   opacity: 0;
@@ -435,6 +576,18 @@ h2 {
   .click-instruction-outer span {
     font-size: 14px;
   }
+  .gallery-masonry {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .gallery-item.large {
+    grid-column: span 2;
+  }
+  .lightbox-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 32px;
+  }
 }
 </style>
 </head>
@@ -461,7 +614,6 @@ h2 {
     </div>
   </div>
   
-  <!-- INSTRUKSI KLIK DI LUAR AMPLOP - JELAS DAN TERLIHAT -->
   <div class="click-instruction-outer">
     <span>👇 TEKAN AMPLOP DI ATAS 👆</span>
     <small>Klik untuk membuka undangan</small>
@@ -504,12 +656,12 @@ h2 {
     <div class="glass-frame reveal">
       <h3 class="gold-text" style="text-align:center; font-size:28px;">🌿 Mempelai Pria & Wanita 🌿</h3>
       <div class="couple-photo">
-        <img src="cowo.jpg" alt="Fikri" class="photo-round" onclick="openLightbox(this.src)">
+        <img src="cowo.jpg" alt="Fikri" class="photo-round" onclick="openLightboxByIndex(0)">
         <div style="text-align:center">
           <h3 class="gold-text">Fikri Anugrah Ramadhan</h3>
           <p>Putra Bapak Arman & Ibu Nurhayati</p>
         </div>
-        <img src="cewe.jpg" alt="Sindi" class="photo-round" onclick="openLightbox(this.src)">
+        <img src="cewe.jpg" alt="Sindi" class="photo-round" onclick="openLightboxByIndex(1)">
         <div style="text-align:center">
           <h3 class="gold-text">Sindi Rosmiati</h3>
           <p>Putri Bapak Suryana & Ibu Elis Herawati</p>
@@ -518,19 +670,15 @@ h2 {
     </div>
   </div>
 
-  <!-- GALERI FOTO PREMIUM -->
+  <!-- GALERI PREMIUM - INTERAKTIF -->
   <div class="section-card" id="gallery">
-    <div class="glass-frame reveal">
-      <h3 class="gold-text" style="text-align:center; font-size:28px;">🌸 Galeri Kenangan 🌸</h3>
-      <div class="gallery-grid">
-        <img src="berdua.jpg" class="gallery-img" onclick="openLightbox(this.src)" alt="Pasangan 1">
-        <img src="cowo.jpg" class="gallery-img" onclick="openLightbox(this.src)" alt="Pengantin Pria">
-        <img src="cewe.jpg" class="gallery-img" onclick="openLightbox(this.src)" alt="Pengantin Wanita">
-        <img src="berdua.jpg" class="gallery-img" onclick="openLightbox(this.src)" alt="Pasangan 2">
-        <img src="cowo.jpg" class="gallery-img" onclick="openLightbox(this.src)" alt="potrait">
-        <img src="cewe.jpg" class="gallery-img" onclick="openLightbox(this.src)" alt="potrait wanita">
+    <div class="gallery-section reveal">
+      <h3 class="gallery-title">🌸 Galeri Kenangan 🌸</h3>
+      <p class="gallery-sub">✨ Momen spesial kami ✨</p>
+      <div class="gallery-masonry" id="galleryGrid">
+        <!-- Galeri akan diisi JavaScript dengan efek interaktif -->
       </div>
-      <p style="font-size:12px; text-align:center; margin-top:15px;">*Klik foto untuk melihat lebih jelas</p>
+      <p style="font-size:12px; text-align:center; margin-top:20px;">💫 Klik foto untuk melihat lebih detail | Geser untuk foto berikutnya</p>
     </div>
   </div>
 
@@ -554,9 +702,15 @@ h2 {
   </div>
 </div>
 
-<!-- Lightbox Modal -->
-<div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox()">
-  <img id="lightboxImage" class="lightbox-img" src="" alt="preview">
+<!-- Lightbox Premium dengan Navigasi -->
+<div id="lightboxModal" class="lightbox-modal">
+  <div class="lightbox-close" onclick="closeLightbox()">&times;</div>
+  <div class="lightbox-nav prev" onclick="prevImage(event)">&#10094;</div>
+  <div class="lightbox-nav next" onclick="nextImage(event)">&#10095;</div>
+  <div class="lightbox-container">
+    <img id="lightboxImage" class="lightbox-img" src="" alt="preview">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+  </div>
 </div>
 
 <!-- Audio Music -->
@@ -566,7 +720,105 @@ h2 {
 <div class="music-player" id="musicToggleBtn">🎵</div>
 
 <script>
-  // ---------- GLOBAL ELEMENTS ----------
+  // ========== DATA GALERI ==========
+  const galleryImages = [
+    { src: "berdua.jpg", caption: "💑 Bersama dalam kebahagiaan", size: "normal" },
+    { src: "cowo.jpg", caption: "👨‍💼 Fikri - Calon Imam", size: "normal" },
+    { src: "cewe.jpg", caption: "👰‍♀️ Sindi - Calon Istri", size: "large" },
+    { src: "berdua.jpg", caption: "💕 Momen spesial berdua", size: "normal" },
+    { src: "cowo.jpg", caption: "✨ Tersenyum untuk hari bahagia", size: "normal" },
+    { src: "cewe.jpg", caption: "🌹 Pesona mempelai wanita", size: "normal" },
+    { src: "berdua.jpg", caption: "🤵‍♂️👰‍♀️ Janji suci", size: "large" }
+  ];
+  
+  let currentImageIndex = 0;
+  
+  // Render Galeri dengan efek Masonry
+  function renderGallery() {
+    const galleryGrid = document.getElementById('galleryGrid');
+    galleryGrid.innerHTML = '';
+    
+    galleryImages.forEach((img, index) => {
+      const item = document.createElement('div');
+      item.className = `gallery-item ${img.size === 'large' ? 'large' : ''}`;
+      item.setAttribute('data-index', index);
+      
+      const image = document.createElement('img');
+      image.src = img.src;
+      image.alt = `Momen spesial ${index + 1}`;
+      image.loading = 'lazy';
+      image.onerror = function() {
+        this.src = 'https://placehold.co/600x600/2b2118/c8a96a?text=Foto+Spesial';
+      };
+      
+      const overlay = document.createElement('div');
+      overlay.className = 'gallery-overlay';
+      overlay.innerHTML = `<span>❤️ Lihat Foto</span>`;
+      
+      item.appendChild(image);
+      item.appendChild(overlay);
+      
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openLightboxByIndex(index);
+      });
+      
+      galleryGrid.appendChild(item);
+    });
+  }
+  
+  // Lightbox functions dengan navigasi
+  function openLightboxByIndex(index) {
+    if (index < 0) index = 0;
+    if (index >= galleryImages.length) index = galleryImages.length - 1;
+    currentImageIndex = index;
+    const img = galleryImages[currentImageIndex];
+    const lightboxImg = document.getElementById('lightboxImage');
+    const caption = document.getElementById('lightboxCaption');
+    lightboxImg.src = img.src;
+    caption.innerHTML = img.caption;
+    document.getElementById('lightboxModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // fallback jika gambar error
+    lightboxImg.onerror = function() {
+      this.src = 'https://placehold.co/800x800/2b2118/c8a96a?text=Foto+Spesial';
+      caption.innerHTML = '✨ Momen Indah ✨';
+    };
+  }
+  
+  function closeLightbox() {
+    document.getElementById('lightboxModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  
+  function nextImage(event) {
+    if (event) event.stopPropagation();
+    currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+    const img = galleryImages[currentImageIndex];
+    document.getElementById('lightboxImage').src = img.src;
+    document.getElementById('lightboxCaption').innerHTML = img.caption;
+  }
+  
+  function prevImage(event) {
+    if (event) event.stopPropagation();
+    currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+    const img = galleryImages[currentImageIndex];
+    document.getElementById('lightboxImage').src = img.src;
+    document.getElementById('lightboxCaption').innerHTML = img.caption;
+  }
+  
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    const modal = document.getElementById('lightboxModal');
+    if (modal.classList.contains('active')) {
+      if (e.key === 'ArrowRight') nextImage(e);
+      else if (e.key === 'ArrowLeft') prevImage(e);
+      else if (e.key === 'Escape') closeLightbox();
+    }
+  });
+  
+  // ========== SISA FUNGSI UNDANGAN ==========
   const coverScreen = document.getElementById('coverScreen');
   const envelopeDiv = document.getElementById('envelope');
   const mainContainer = document.getElementById('mainContent');
@@ -576,7 +828,6 @@ h2 {
   let isMusicPlaying = false;
   let opened = false;
   
-  // fungsi smooth play musik (fade in)
   function fadeInMusic() {
     if (!audioEl.paused) return;
     audioEl.volume = 0;
@@ -593,7 +844,7 @@ h2 {
       isMusicPlaying = true;
       updateMusicIcon();
     }).catch(e => {
-      console.log("Autoplay diblokir, butuh interaksi user.");
+      console.log("Autoplay diblokir");
       isMusicPlaying = false;
       updateMusicIcon();
     });
@@ -615,32 +866,24 @@ h2 {
     }
   }
   
-  // Buka amplop dan unlock audio sekaligus
   function openEnvelope() {
     if(opened) return;
     opened = true;
     envelopeDiv.classList.add('open');
-    // Mulai musik setelah interaksi amplop
     fadeInMusic();
     setTimeout(() => {
       coverScreen.style.display = 'none';
       mainContainer.style.display = 'block';
       document.body.style.overflow = 'auto';
-      // trigger scroll reveal
       window.dispatchEvent(new Event('scroll'));
     }, 1000);
   }
   
   envelopeDiv.addEventListener('click', openEnvelope);
-  
-  // musik button handle
   musicBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (!opened) {
-      openEnvelope();
-    } else {
-      toggleMusic();
-    }
+    if (!opened) openEnvelope();
+    else toggleMusic();
   });
   
   // COUNTDOWN TIMER
@@ -692,7 +935,6 @@ h2 {
       if(navLinks[0]) navLinks[0].classList.add('active');
     }
     
-    // reveal animation
     document.querySelectorAll('.reveal').forEach(el => {
       const rect = el.getBoundingClientRect();
       if(rect.top < window.innerHeight - 80) {
@@ -704,23 +946,8 @@ h2 {
   window.addEventListener('scroll', activateNavOnScroll);
   window.addEventListener('load', () => {
     activateNavOnScroll();
+    renderGallery();
   });
-  
-  // LIGHTBOX FUNCTION
-  const lightbox = document.getElementById('lightboxModal');
-  const lightboxImg = document.getElementById('lightboxImage');
-  function openLightbox(imgSrc) {
-    if (imgSrc) {
-      lightboxImg.src = imgSrc;
-      lightbox.classList.add('active');
-    }
-  }
-  function closeLightbox() {
-    lightbox.classList.remove('active');
-    lightboxImg.src = "";
-  }
-  window.openLightbox = openLightbox;
-  window.closeLightbox = closeLightbox;
   
   // smooth scroll nav
   document.querySelectorAll('.nav-link').forEach(anchor => {
@@ -736,7 +963,7 @@ h2 {
     });
   });
   
-  // fallback image jika error
+  // fallback image
   const allImgs = document.querySelectorAll('img');
   allImgs.forEach(img => {
     img.addEventListener('error', function() {
@@ -746,16 +973,13 @@ h2 {
     });
   });
   
-  // main hidden sebelum buka
   mainContainer.style.display = 'none';
   document.body.style.overflow = 'hidden';
   
-  // handle audio context untuk mobile
-  document.body.addEventListener('touchstart', function unlockAudioOnce() {
-    if (!opened && audioEl.paused) {
-      audioEl.load();
-    }
-  }, { once: true });
+  window.openLightboxByIndex = openLightboxByIndex;
+  window.closeLightbox = closeLightbox;
+  window.nextImage = nextImage;
+  window.prevImage = prevImage;
 </script>
 </body>
 </html>
