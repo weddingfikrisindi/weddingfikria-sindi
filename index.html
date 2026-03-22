@@ -215,29 +215,113 @@ body {
 .lightbox.active { visibility: visible; opacity: 1; }
 .lightbox img { max-width: 90%; max-height: 85%; border-radius: 24px; }
 
+/* ========== GUESTBOOK STYLE BARU (LEBIH PANJANG & ELEGAN) ========== */
 .guestbook-list {
-  max-height: 260px;
+  max-height: 420px;
   overflow-y: auto;
   margin: 15px 0;
+  padding-right: 6px;
+  scrollbar-width: thin;
 }
+
+.guestbook-list::-webkit-scrollbar {
+  width: 5px;
+}
+.guestbook-list::-webkit-scrollbar-track {
+  background: rgba(212, 175, 55, 0.2);
+  border-radius: 10px;
+}
+.guestbook-list::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 10px;
+}
+
 .guestbook-item {
-  background: rgba(255,250,240,0.5);
-  border-radius: 20px;
-  padding: 10px;
-  margin-bottom: 8px;
-  border-left: 3px solid #d4af37;
-}
-.guestbook-name { font-weight: 700; color: #b28bd0; font-size: 13px; }
-.guestbook-message { font-size: 12px; margin-top: 4px; }
-.guestbook-input { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
-.guestbook-input input, .guestbook-input textarea {
-  background: rgba(255,250,240,0.8);
-  border: 1px solid rgba(212,175,55,0.5);
+  background: rgba(255, 250, 240, 0.7);
+  backdrop-filter: blur(4px);
   border-radius: 24px;
-  padding: 10px 14px;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  border-left: 4px solid #d4af37;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.guestbook-item:hover {
+  transform: translateX(5px);
+  background: rgba(255, 250, 240, 0.9);
+  border-left-color: #b28bd0;
+}
+
+.guestbook-name {
+  font-weight: 700;
+  color: #b28bd0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.guestbook-name::before {
+  content: "💬";
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.guestbook-message {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #2e2a24;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+/* Input area lebih nyaman */
+.guestbook-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.guestbook-input input,
+.guestbook-input textarea {
+  background: rgba(255, 250, 240, 0.9);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-radius: 28px;
+  padding: 12px 16px;
   font-family: inherit;
   font-size: 13px;
+  transition: 0.2s;
 }
+
+.guestbook-input input:focus,
+.guestbook-input textarea:focus {
+  outline: none;
+  border-color: #b28bd0;
+  background: rgba(255, 250, 240, 1);
+  box-shadow: 0 0 0 3px rgba(178, 139, 208, 0.2);
+}
+
+.guestbook-input button {
+  background: linear-gradient(135deg, #d4af37, #c8a15e);
+  border: none;
+  padding: 12px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: #2e2a24;
+  margin-top: 4px;
+}
+
+.guestbook-input button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(212, 175, 55, 0.3);
+}
+/* ========== END GUESTBOOK STYLE ========== */
 
 .gift-box { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 18px 0; }
 .gift-card {
@@ -295,6 +379,8 @@ body {
   .photo-square { width: 140px; height: 140px; }
   .countdown-number { font-size: 1.3rem; }
   .navbar a { font-size: 10px; padding: 4px 8px; }
+  .guestbook-list { max-height: 360px; }
+  .guestbook-item { padding: 12px 14px; }
 }
 </style>
 </head>
@@ -324,8 +410,9 @@ body {
     <small>Klik untuk membuka undangan</small>
   </div>
 </div>
+
 <div class="main-content" id="mainContent">
-   <div class="section-card" id="home">
+  <div class="section-card" id="home">
     <div class="glass-card reveal" style="padding:24px; text-align:center;">
       <h3 class="gold-text">ٱلسَّلَامُ عَلَيْكُمْ</h3>
       <p style="margin:8px 0; font-size:13px;">Dengan memohon rahmat Allah SWT, kami mengundang Bapak/Ibu/Saudara/i</p>
@@ -339,65 +426,44 @@ body {
       </div>
     </div>
   </div>
+
   <!-- AYAT, HADIS, DOA & MUTIARA -->
   <div class="section-card">
     <div class="glass-card reveal" style="padding:28px 24px;">
-      
-      <!-- QS. Ar-Rum:21 -->
       <div style="text-align:center; margin-bottom:20px;">
         <p style="font-style:italic; font-size:0.95rem; line-height:1.6;">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir."</p>
         <p style="margin-top:10px; font-size:13px; color:#b28bd0;">— QS. Ar-Rum : 21 —</p>
       </div>
-      
       <hr style="margin:20px 0; border-color:rgba(212,175,55,0.3);">
-      
-      <!-- HR. Bukhari & Muslim -->
       <div style="text-align:center; margin-bottom:20px;">
         <p style="font-style:italic; font-size:0.95rem;">"Nikahilah wanita karena agamanya, niscaya beruntung."</p>
         <p style="margin-top:8px; font-size:13px; color:#b28bd0;">— HR. Bukhari & Muslim —</p>
       </div>
-      
       <hr style="margin:20px 0; border-color:rgba(212,175,55,0.3);">
-      
-      <!-- Doa Rasulullah untuk Pengantin -->
       <div style="text-align:center; margin-bottom:20px;">
         <p style="font-style:italic; font-size:0.95rem;">"بَارَكَ اللَّهُ لَكَ، وَبَارَكَ عَلَيْكَ، وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ"</p>
         <p style="margin-top:8px; font-size:13px;">"Semoga Allah memberkahi kalian berdua, memberkati pernikahan kalian, dan mengumpulkan kalian dalam kebaikan."</p>
         <p style="margin-top:6px; font-size:12px; color:#b28bd0;">— Doa Rasulullah SAW untuk pengantin —</p>
       </div>
-      
       <hr style="margin:20px 0; border-color:rgba(212,175,55,0.3);">
-      
-      <!-- Kata Mutiara Pernikahan -->
       <div style="text-align:center; margin-bottom:20px;">
         <p style="font-size:0.95rem;">✨ <strong>Cinta sejati</strong> bukan tentang menemukan seseorang yang sempurna,<br>tapi tentang belajar melihat ketidaksempurnaan dengan penuh kasih sayang. ✨</p>
       </div>
-      
       <hr style="margin:20px 0; border-color:rgba(212,175,55,0.3);">
-      
-      <!-- QS. An-Naba' : 8 -->
       <div style="text-align:center; margin-bottom:10px;">
         <p style="font-style:italic; font-size:0.95rem;">"وَجَعَلْنَاكُمْ أَزْوَاجًا"</p>
         <p style="margin-top:5px; font-size:13px;">"Dan Kami ciptakan kamu berpasang-pasangan."</p>
         <p style="margin-top:5px; font-size:12px; color:#b28bd0;">— QS. An-Naba' : 8 —</p>
       </div>
-      
       <hr style="margin:20px 0; border-color:rgba(212,175,55,0.3);">
-      
-      <!-- Penutup Ucapan Terima Kasih -->
       <div style="text-align:center;">
         <p style="font-size:0.9rem;">🤍 <strong>Jazakumullah Khairan</strong> 🤍</p>
         <p style="font-size:12px; margin-top:10px;">Kami ucapkan terima kasih atas doa restu dan kehadiran Bapak/Ibu sekalian.<br>Semoga Allah membalas kebaikan Anda dengan kebaikan yang berlipat.</p>
       </div>
-      
     </div>
   </div>
 
   <!-- MEMPELAI -->
-  <div class="section-card" id="couple">
-    ...
-  </div>
-
   <div class="section-card" id="couple">
     <div class="glass-card reveal" style="padding:24px; text-align:center;">
       <h3 class="gold-text">🌿 Mempelai 🌿</h3>
@@ -433,7 +499,7 @@ body {
       <div class="guestbook-input">
         <input type="text" id="guestName" placeholder="Nama Anda">
         <textarea id="guestMessage" rows="2" placeholder="Tulis ucapan & doa..."></textarea>
-        <button onclick="addMessage()" style="background:#d4af37; border:none; padding:10px; border-radius:30px; font-weight:600;">Kirim Ucapan 💌</button>
+        <button onclick="addMessage()">Kirim Ucapan 💌</button>
       </div>
     </div>
   </div>
@@ -458,7 +524,7 @@ body {
 <div class="music-player" id="musicBtn">🎵</div>
 
 <script>
-// ========== AMPLOP - FIX ERROR CONFETTI ==========
+// ========== AMPLOP ==========
 const coverScreen = document.getElementById('coverScreen');
 const envelopeCard = document.getElementById('envelope');
 const mainContent = document.getElementById('mainContent');
@@ -467,9 +533,7 @@ const musicBtn = document.getElementById('musicBtn');
 let musicPlaying = false;
 let isOpened = false;
 
-// Fungsi confetti manual (fallback karena library error)
 function simpleConfetti() {
-  // Buat confetti sederhana dengan JavaScript vanilla
   for(let i = 0; i < 50; i++) {
     const conf = document.createElement('div');
     conf.style.position = 'fixed';
@@ -482,7 +546,6 @@ function simpleConfetti() {
     conf.style.zIndex = '999';
     conf.style.pointerEvents = 'none';
     document.body.appendChild(conf);
-    
     let posY = -10;
     const fall = setInterval(() => {
       posY += 5;
@@ -492,7 +555,6 @@ function simpleConfetti() {
         conf.remove();
       }
     }, 20);
-    
     setTimeout(() => {
       clearInterval(fall);
       if(conf) conf.remove();
@@ -534,30 +596,18 @@ function toggleMusic() {
 function openInvitation() {
   if (isOpened) return;
   isOpened = true;
-  
-  // Buka amplop
   envelopeCard.classList.add('open');
-  
-  // Confetti manual (tanpa library)
   simpleConfetti();
-  
-  // Putar musik
   playMusic();
-  
-  // Setelah animasi, tampilkan konten utama
   setTimeout(() => {
     coverScreen.style.display = 'none';
     mainContent.style.display = 'block';
     document.body.style.overflow = 'auto';
-    // Trigger scroll reveal
     window.dispatchEvent(new Event('scroll'));
   }, 600);
 }
 
-// Event listener amplop
 envelopeCard.addEventListener('click', openInvitation);
-
-// Tombol musik
 musicBtn.addEventListener('click', function(e) {
   e.stopPropagation();
   if (!isOpened) {
@@ -613,8 +663,8 @@ function loadMessages() {
     messages = JSON.parse(saved);
   } else {
     messages = [
-      { name: "🌹 Keluarga Besar", msg: "Selamat menempuh hidup baru, semoga sakinah mawaddah warahmah!" },
-      { name: "✨ Teman Sejati", msg: "Happy wedding! Langgeng selalu berdua 💕" }
+      { name: "🌹 Keluarga Besar", msg: "Selamat menempuh hidup baru, semoga sakinah mawaddah warahmah! Semoga keluarga baru selalu dalam lindungan Allah SWT." },
+      { name: "✨ Teman Sejati", msg: "Happy wedding! Langgeng selalu berdua, semoga jadi keluarga yang sakinah, mawaddah, warahmah. Aamiin 💕" }
     ];
   }
   renderMessages();
@@ -645,7 +695,7 @@ function addMessage() {
     alert('Isi nama dan ucapan dulu ya 😊');
     return;
   }
-  messages.push({ name: name.slice(0, 30), msg: msg.slice(0, 200) });
+  messages.push({ name: name.slice(0, 30), msg: msg.slice(0, 300) });
   renderMessages();
   document.getElementById('guestName').value = '';
   document.getElementById('guestMessage').value = '';
@@ -712,7 +762,6 @@ document.getElementById('imgWanita')?.addEventListener('click', () => {
   document.getElementById('lightbox').classList.add('active');
 });
 
-// Sembunyikan main dulu
 mainContent.style.display = 'none';
 document.body.style.overflow = 'hidden';
 </script>
