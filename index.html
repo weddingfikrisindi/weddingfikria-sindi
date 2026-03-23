@@ -37,8 +37,8 @@ body::before {
   z-index: 0;
 }
 
-/* ========== SPLASH SCREEN ========== */
-.splash-screen {
+/* ========== PRELOADER (HANYA 1) ========== */
+.preloader {
   position: fixed;
   top: 0;
   left: 0;
@@ -53,122 +53,34 @@ body::before {
   transition: opacity 0.8s ease, visibility 0.8s;
 }
 
-.splash-screen.hide {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.splash-logo {
-  width: 130px;
-  height: 130px;
-  background: linear-gradient(135deg, #e5c890, #c8a15e);
-  border-radius: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 35px;
-  animation: splashPulse 1.2s infinite alternate, splashFloat 2s ease-in-out infinite;
-  box-shadow: 0 0 40px rgba(229, 200, 144, 0.5);
-}
-
-.splash-logo span {
-  font-size: 62px;
-  font-family: 'Playfair Display', serif;
-  font-weight: 800;
-  color: #0a0a0c;
-  letter-spacing: 2px;
-}
-
-@keyframes splashPulse {
-  0% { transform: scale(1); box-shadow: 0 0 20px rgba(229, 200, 144, 0.4); }
-  100% { transform: scale(1.05); box-shadow: 0 0 50px rgba(229, 200, 144, 0.7); }
-}
-
-@keyframes splashFloat {
-  0% { transform: translateY(0px); }
-  100% { transform: translateY(-10px); }
-}
-
-.splash-title {
-  font-size: 15px;
-  letter-spacing: 5px;
-  color: #e5c890;
-  margin-bottom: 15px;
-  font-weight: 500;
-}
-
-.splash-names {
-  font-size: 28px;
-  font-family: 'Playfair Display', serif;
-  color: white;
-  margin-bottom: 45px;
-  text-align: center;
-  line-height: 1.3;
-}
-
-.splash-names span {
-  color: #e5c890;
-}
-
-.splash-progress {
-  width: 200px;
-  height: 3px;
-  background: rgba(229, 200, 144, 0.3);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.splash-progress-fill {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, #e5c890, #d4af37);
-  transition: width 0.3s ease;
-}
-
-/* ========== PRELOADER ========== */
-.preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: #0a0a0c;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  transition: opacity 0.8s ease;
-}
-
 .preloader.hide {
   opacity: 0;
   visibility: hidden;
 }
 
 .preloader-logo {
-  width: 90px;
-  height: 90px;
-  border: 3px solid #e5c890;
-  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #e5c890, #c8a15e);
+  border-radius: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
-  animation: pulseLogo 1.5s infinite;
+  animation: pulseLogo 1.5s infinite alternate;
+  box-shadow: 0 0 30px rgba(229, 200, 144, 0.4);
 }
 
 .preloader-logo span {
-  font-size: 38px;
+  font-size: 48px;
   font-family: 'Playfair Display', serif;
-  color: #e5c890;
-  font-weight: 700;
+  font-weight: 800;
+  color: #0a0a0c;
 }
 
 @keyframes pulseLogo {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(229, 200, 144, 0.4); }
-  70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(229, 200, 144, 0); }
-  100% { transform: scale(0.95); }
+  0% { transform: scale(0.98); box-shadow: 0 0 20px rgba(229, 200, 144, 0.3); }
+  100% { transform: scale(1.05); box-shadow: 0 0 45px rgba(229, 200, 144, 0.7); }
 }
 
 .preloader-text {
@@ -415,46 +327,61 @@ body::before {
 .countdown-number { font-size: 1.5rem; font-weight: 700; color: #e8d29c; }
 .countdown-label { font-size: 9px; text-transform: uppercase; color: #b8a87a; }
 
-/* ========== HORIZONTAL SCROLL ========== */
-.horizontal-scroll {
-  overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  padding: 8px 0 16px 0;
+/* ========== FOTO MEMPELAI SAMPING-SAMPINGAN ========== */
+.couple-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px 0;
 }
-.horizontal-scroll::-webkit-scrollbar { display: none; }
-.scroll-item {
-  display: inline-block;
-  white-space: normal;
-  scroll-snap-align: start;
-  margin-right: 16px;
-  vertical-align: top;
-  width: 280px;
-}
-.scroll-item:first-child { margin-left: 16px; }
-.scroll-item:last-child { margin-right: 16px; }
 
-.couple-photo {
+.couple-card {
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+}
+
+.photo-square {
   width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 28px;
   border: 2px solid rgba(212, 175, 55, 0.5);
   cursor: pointer;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
 }
 
-/* ========== GALERI INSTAGRAM STYLE ========== */
-.instagram-grid {
+.photo-square:hover {
+  transform: scale(1.02);
+}
+
+/* ========== GALERI (1 BESAR HORIZONTAL + 3 KECIL DI BAWAH) ========== */
+.gallery-main {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 24px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.gallery-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-thumbnails {
   display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 12px;
+  justify-content: space-between;
 }
 
-.instagram-main {
+.gallery-thumb {
   flex: 1;
   aspect-ratio: 1 / 1;
   border-radius: 20px;
@@ -462,27 +389,7 @@ body::before {
   cursor: pointer;
 }
 
-.instagram-main img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.instagram-side {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.instagram-side-item {
-  flex: 1;
-  border-radius: 20px;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.instagram-side-item img {
+.gallery-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -493,6 +400,7 @@ body::before {
   gap: 12px;
   overflow-x: auto;
   scrollbar-width: none;
+  margin-top: 16px;
   padding-bottom: 8px;
 }
 .gallery-horizontal::-webkit-scrollbar { display: none; }
@@ -565,29 +473,35 @@ body::before {
 .gift-box {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 20px;
   justify-content: center;
   margin: 15px 0;
 }
 .gift-card {
   background: rgba(25, 25, 35, 0.6);
   backdrop-filter: blur(12px);
-  border-radius: 24px;
-  padding: 12px;
+  border-radius: 28px;
+  padding: 20px;
   text-align: center;
-  flex: 1;
-  min-width: 110px;
+  min-width: 250px;
   border: 0.5px solid rgba(212, 175, 55, 0.35);
 }
 .copy-btn {
   background: rgba(229, 200, 144, 0.2);
   border: 0.5px solid #e5c890;
-  padding: 5px 10px;
+  padding: 8px 16px;
   border-radius: 30px;
-  margin-top: 8px;
+  margin-top: 12px;
   cursor: pointer;
-  font-size: 10px;
+  font-size: 12px;
   color: #e5c890;
+}
+.qris-img {
+  width: 150px;
+  margin: 10px 0;
+  border-radius: 16px;
+  background: white;
+  padding: 8px;
 }
 
 /* ========== VISUALIZER ========== */
@@ -693,6 +607,9 @@ body::before {
   .hero-title { font-size: 1.8rem; }
   .hero-date { font-size: 0.9rem; }
   .hero-quote { font-size: 0.75rem; }
+  .couple-horizontal { gap: 20px; }
+  .photo-square { max-width: 160px; }
+  .gift-card { min-width: 90%; }
 }
 @media (min-width: 768px) {
   .main-content { max-width: 480px; margin: 0 auto; }
@@ -702,15 +619,7 @@ body::before {
 </head>
 <body>
 
-<!-- SPLASH SCREEN -->
-<div class="splash-screen" id="splashScreen">
-  <div class="splash-logo"><span>F&S</span></div>
-  <div class="splash-title">THE WEDDING OF</div>
-  <div class="splash-names">Fikri <span>&</span> Sindi</div>
-  <div class="splash-progress"><div class="splash-progress-fill" id="splashProgress"></div></div>
-</div>
-
-<!-- PRELOADER -->
+<!-- PRELOADER (HANYA 1) -->
 <div class="preloader" id="preloader">
   <div class="preloader-logo"><span>F&S</span></div>
   <div class="preloader-text">MEMBUKA UNDANGAN</div>
@@ -744,16 +653,15 @@ body::before {
 
 <div class="main-content" id="mainContent">
   
-  <!-- HERO VIDEO SECTION (Setelah Amplop Dibuka) -->
+  <!-- HERO VIDEO SECTION -->
   <div class="hero-video-section" id="heroVideo">
     <video class="hero-bg-video" autoplay muted loop playsinline>
       <source src="video.mp4" type="video/mp4">
-      <!-- Ganti "video.mp4" dengan nama file video kamu -->
     </video>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h2 class="hero-title">Fikri & Sindi</h2>
-      <p class="hero-date">Minggu, 05 April 2026</p>
+      <p class="hero-date">Akad & Resepsi | 05 April 2026 | 08:00 WIB</p>
       <p class="hero-quote">"Dan di antara tanda-tanda kekuasaan-Nya, Dia menciptakan pasangan untukmu..."</p>
     </div>
   </div>
@@ -764,7 +672,8 @@ body::before {
       <h3 class="gold-text">ٱلسَّلَامُ عَلَيْكُمْ</h3>
       <p style="margin:10px 0; font-size:13px;">Dengan memohon rahmat Allah SWT, kami mengundang Bapak/Ibu/Saudara/i</p>
       <h2 style="font-size:1.4rem; font-family:'Playfair Display';">Fikri Anugrah R.<br>&<br>Sindi Rosmiati</h2>
-      <p style="margin:8px 0;">Minggu, 05 April 2026</p>
+      <p style="margin:8px 0;">Minggu, 05 April 2026 | 08:00 WIB</p>
+      <p style="font-size:12px;">📍 Kediaman Mempelai Wanita</p>
       <div class="countdown-box">
         <div class="countdown-item"><span class="countdown-number" id="days">00</span><div class="countdown-label">Hari</div></div>
         <div class="countdown-item"><span class="countdown-number" id="hours">00</span><div class="countdown-label">Jam</div></div>
@@ -808,44 +717,50 @@ body::before {
     </div>
   </div>
 
-  <!-- FOTO MEMPELAI - SWIPE HORIZONTAL -->
+  <!-- FOTO MEMPELAI SAMPING-SAMPINGAN -->
   <div class="section-card" id="couple">
     <div class="glass-card reveal">
       <h3 class="gold-text">🌿 Mempelai 🌿</h3>
-      <div class="horizontal-scroll" id="coupleScroll">
-        <div class="scroll-item">
-          <img src="cowo.jpg" class="couple-photo" id="imgPria">
-          <h3 class="gold-text" style="margin-top:12px; font-size:18px;">Fikri Anugrah R.</h3>
-          <p style="font-size:12px;">Putra Bapak Heri Nugraha & Ibu Nurhayati</p>
+      <div class="couple-horizontal">
+        <div class="couple-card">
+          <img src="cowo.jpg" class="photo-square" id="imgPria">
+          <h3 class="gold-text" style="margin-top:16px;">Fikri Anugrah R.</h3>
+          <p>Putra Bapak Heri Nugraha & Ibu <strong>Krinowati</strong></p>
         </div>
-        <div class="scroll-item">
-          <img src="cewe.jpg" class="couple-photo" id="imgWanita">
-          <h3 class="gold-text" style="margin-top:12px; font-size:18px;">Sindi Rosmiati</h3>
-          <p style="font-size:12px;">Putri Bapak Enjang Supriyadi & Ibu Elis Herawati</p>
+        <div class="couple-card">
+          <img src="cewe.jpg" class="photo-square" id="imgWanita">
+          <h3 class="gold-text" style="margin-top:16px;">Sindi Rosmiati</h3>
+          <p>Putri Bapak Enjang Supriyadi & Ibu <strong>Lilis Listiawati</strong></p>
         </div>
       </div>
-      <p style="text-align:center; font-size:10px; margin-top:12px; opacity:0.6;">↜ Geser ke samping ↝</p>
     </div>
   </div>
 
-  <!-- GALERI INSTAGRAM STYLE -->
+  <!-- GALERI -->
   <div class="section-card" id="gallery">
     <div class="glass-card reveal">
       <h3 class="gold-text">🌸 Galeri Kenangan</h3>
-      <div id="instagramGallery"></div>
-      <p style="text-align:center; font-size:10px; margin-top:12px; opacity:0.6;">↜ Geser untuk lihat foto lainnya | Klik foto untuk memperbesar ↝</p>
+      <div id="galleryContainer"></div>
+      <p style="text-align:center; font-size:10px; margin-top:12px; opacity:0.6;">Klik foto untuk memperbesar</p>
     </div>
   </div>
 
-  <!-- AMPLOP DIGITAL -->
+  <!-- AMPLOP DIGITAL (MANDIRI + QRIS) -->
   <div class="section-card" id="gift">
     <div class="glass-card reveal">
       <h3 class="gold-text">🎁 Amplop Digital</h3>
       <div class="gift-box">
-        <div class="gift-card"><strong>💳 BCA</strong><p>1234 5678 9012 3456</p><p>a.n. Fikri Anugrah</p><button class="copy-btn" onclick="copyText('1234567890123456')">Salin</button></div>
-        <div class="gift-card"><strong>🏦 Mandiri</strong><p>1234 5678 9012 3456</p><p>a.n. Sindi Rosmiati</p><button class="copy-btn" onclick="copyText('1234567890123456')">Salin</button></div>
-        <div class="gift-card"><strong>🏧 BRI</strong><p>1234 5678 9012 3456</p><p>a.n. Fikri & Sindi</p><button class="copy-btn" onclick="copyText('1234567890123456')">Salin</button></div>
-        <div class="gift-card"><strong>📱 QRIS</strong><img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&data=QRIS%20Fikri%20Sindi" style="width:60px; margin:6px 0;"><button class="copy-btn" onclick="copyText('QRIS Fikri Sindi')">Salin QRIS</button></div>
+        <div class="gift-card">
+          <strong>🏦 Bank Mandiri</strong>
+          <p style="margin:10px 0;">1770023715649</p>
+          <p>a.n. FIKRI ANUGRAH RAMADHAN</p>
+          <button class="copy-btn" onclick="copyText('1770023715649')">Salin Rekening</button>
+        </div>
+        <div class="gift-card">
+          <strong>📱 QRIS</strong>
+          <img src="qris.png" class="qris-img" id="qrisImage" alt="QRIS" onerror="this.src='https://placehold.co/200x200/2a2a2a/e5c890?text=QRIS'">
+          <button class="copy-btn" onclick="copyText('QRIS Fikri & Sindi')">Salin QRIS</button>
+        </div>
       </div>
     </div>
   </div>
@@ -866,8 +781,8 @@ body::before {
   <!-- LOKASI -->
   <div class="section-card" id="location">
     <div class="glass-card reveal" style="text-align:center;">
-      <h3 class="gold-text">📍 Lokasi Acara</h3>
-      <p style="font-size:12px;">Kp. Cianca RT 001/008, Desa Cisomang Barat<br>Cikalong Wetan, Bandung Barat</p>
+      <h3 class="gold-text">📍 Lokasi Akad & Resepsi</h3>
+      <p style="font-size:12px;"><strong>Kediaman Mempelai Wanita</strong><br>Kp. Cianca RT 001/008, Desa Cisomang Barat<br>Cikalong Wetan, Bandung Barat</p>
       <iframe class="map-frame" src="https://www.google.com/maps?q=Cisomang+Barat+Cikalong+Wetan&output=embed"></iframe>
       <a href="https://maps.app.goo.gl/6fNTUMAbQiqNRJ566" target="_blank" class="btn-custom">🗺️ Buka Maps</a>
       <a href="https://wa.me/6282249786900?text=Assalamualaikum%2C%20saya%20akan%20hadir" class="btn-custom">📩 Konfirmasi Hadir</a>
@@ -890,20 +805,6 @@ body::before {
 <div class="music-player" id="musicBtn">🎵</div>
 
 <script>
-// ========== SPLASH SCREEN ==========
-const splashScreen = document.getElementById('splashScreen');
-const splashProgress = document.getElementById('splashProgress');
-let splashPercent = 0;
-const splashInterval = setInterval(() => {
-  splashPercent += Math.random() * 20;
-  if (splashPercent >= 100) {
-    splashPercent = 100;
-    clearInterval(splashInterval);
-    setTimeout(() => splashScreen.classList.add('hide'), 500);
-  }
-  splashProgress.style.width = Math.min(splashPercent, 100) + '%';
-}, 200);
-
 // ========== PRELOADER ==========
 const preloader = document.getElementById('preloader');
 const preloaderProgress = document.getElementById('preloaderProgress');
@@ -1039,34 +940,33 @@ document.getElementById('candleIcon').addEventListener('click', () => {
   simpleConfetti();
 });
 
-// ========== GALERI INSTAGRAM STYLE ==========
+// ========== GALERI (1 BESAR HORIZONTAL + 3 KECIL DI BAWAH) ==========
 const allGalleryImages = ["berdua.jpg", "cowo.jpg", "cewe.jpg", "berdua.jpg", "cowo.jpg", "cewe.jpg", "berdua.jpg", "cowo.jpg", "cewe.jpg"];
 
-function renderInstagramGallery() {
-  const container = document.getElementById('instagramGallery');
+function renderGallery() {
+  const container = document.getElementById('galleryContainer');
   if (!container) return;
   
   const mainImg = allGalleryImages[0];
-  const sideImgs = allGalleryImages.slice(1, 4);
+  const thumbImgs = allGalleryImages.slice(1, 4);
   const remainingImgs = allGalleryImages.slice(4);
   
   let html = `
-    <div class="instagram-grid">
-      <div class="instagram-main" onclick="openLightbox('${mainImg}')">
-        <img src="${mainImg}" onerror="this.src='https://placehold.co/400x400/2a2a2a/e5c890?text=Foto'">
-      </div>
-      <div class="instagram-side">
+    <div class="gallery-main" onclick="openLightbox('${mainImg}')">
+      <img src="${mainImg}" onerror="this.src='https://placehold.co/800x450/2a2a2a/e5c890?text=Foto'">
+    </div>
+    <div class="gallery-thumbnails">
   `;
   
-  sideImgs.forEach(img => {
+  thumbImgs.forEach(img => {
     html += `
-      <div class="instagram-side-item" onclick="openLightbox('${img}')">
+      <div class="gallery-thumb" onclick="openLightbox('${img}')">
         <img src="${img}" onerror="this.src='https://placehold.co/400x400/2a2a2a/e5c890?text=Foto'">
       </div>
     `;
   });
   
-  html += `</div></div>`;
+  html += `</div>`;
   
   if (remainingImgs.length > 0) {
     html += `<div class="gallery-horizontal">`;
@@ -1151,7 +1051,7 @@ window.downloadQR = downloadQR;
 // ========== CALENDAR ==========
 document.getElementById('calendarBtn')?.addEventListener('click', (e) => {
   e.preventDefault();
-  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('Pernikahan Fikri & Sindi')}&dates=20260405T080000/20260405T120000&details=${encodeURIComponent('Akad & Resepsi di Kediaman Mempelai Wanita')}&location=${encodeURIComponent('Kp. Cianca, Cisomang Barat, Bandung Barat')}&ctz=Asia/Jakarta`;
+  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('Pernikahan Fikri & Sindi')}&dates=20260405T080000/20260405T120000&details=${encodeURIComponent('Akad & Resepsi di Kediaman Mempelai Wanita, Cisomang Barat')}&location=${encodeURIComponent('Kp. Cianca, Cisomang Barat, Cikalong Wetan, Bandung Barat')}&ctz=Asia/Jakarta`;
   window.open(url, '_blank');
 });
 
@@ -1164,7 +1064,7 @@ function checkReveal() {
   });
 }
 window.addEventListener('scroll', checkReveal);
-window.addEventListener('load', () => { checkReveal(); loadMessages(); renderInstagramGallery(); });
+window.addEventListener('load', () => { checkReveal(); loadMessages(); renderGallery(); });
 
 // ========== NAVIGATION ==========
 const sections = document.querySelectorAll('.section-card');
