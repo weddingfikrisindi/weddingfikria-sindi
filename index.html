@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
 <title>Fikri & Sindi - Pernikahan | 5 April 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -10,20 +10,21 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* ========== BACKGROUND GELAP PREMIUM ========== */
+/* ========== MOBILE-FIRST ========== */
 body {
   background: #0a0a0c;
   background-image: 
     linear-gradient(rgba(212, 175, 55, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(212, 175, 55, 0.04) 1px, transparent 1px),
-    repeating-linear-gradient(45deg, rgba(212, 175, 55, 0.01) 0px, rgba(212, 175, 55, 0.01) 1px, transparent 1px, transparent 8px);
-  background-size: 48px 48px, 48px 48px, 16px 16px;
+    linear-gradient(90deg, rgba(212, 175, 55, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
   font-family: 'Montserrat', sans-serif;
   color: #f0ede8;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  max-width: 100vw;
 }
 
 body::before {
@@ -36,12 +37,6 @@ body::before {
   background: radial-gradient(circle at 30% 20%, rgba(212, 175, 55, 0.08), transparent 60%);
   pointer-events: none;
   z-index: 0;
-  animation: lightShift 12s infinite alternate;
-}
-
-@keyframes lightShift {
-  0% { opacity: 0.4; transform: translate(0, 0); }
-  100% { opacity: 1; transform: translate(60px, 40px); }
 }
 
 /* ========== PRELOADER ========== */
@@ -57,7 +52,7 @@ body::before {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  transition: opacity 0.8s ease, visibility 0.8s;
+  transition: opacity 0.8s ease;
 }
 
 .preloader.hide {
@@ -66,39 +61,38 @@ body::before {
 }
 
 .preloader-logo {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   border: 2px solid #e5c890;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   animation: pulseLogo 1.5s infinite;
 }
 
 .preloader-logo span {
-  font-size: 36px;
+  font-size: 28px;
   font-family: 'Playfair Display', serif;
   color: #e5c890;
-  font-weight: 700;
 }
 
 @keyframes pulseLogo {
   0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(229, 200, 144, 0.4); }
   70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(229, 200, 144, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(229, 200, 144, 0); }
+  100% { transform: scale(0.95); }
 }
 
 .preloader-text {
-  font-size: 14px;
-  letter-spacing: 3px;
+  font-size: 12px;
+  letter-spacing: 2px;
   color: #e5c890;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .preloader-bar {
-  width: 200px;
+  width: 160px;
   height: 2px;
   background: rgba(229, 200, 144, 0.3);
   border-radius: 2px;
@@ -114,45 +108,41 @@ body::before {
 
 /* ========== GLASS CARD ========== */
 .glass-card {
-  background: rgba(20, 20, 28, 0.55);
+  background: rgba(20, 20, 28, 0.6);
   backdrop-filter: blur(20px);
-  border: 0.8px solid rgba(212, 175, 55, 0.25);
-  border-radius: 36px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  border: 0.5px solid rgba(212, 175, 55, 0.25);
+  border-radius: 28px;
+  padding: 20px;
+  margin: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.glass-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(212, 175, 55, 0.5);
-  box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
-  background: rgba(25, 25, 35, 0.65);
-}
-
-/* ========== NAVBAR ========== */
+/* ========== NAVBAR MOBILE ========== */
 .navbar {
   position: fixed;
-  top: 0;
-  width: 100%;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
   display: flex;
   justify-content: center;
-  gap: 0.8rem;
-  padding: 12px 20px;
-  background: rgba(10, 10, 12, 0.75);
+  gap: 8px;
+  padding: 10px 12px;
+  background: rgba(10, 10, 12, 0.85);
   backdrop-filter: blur(24px);
   z-index: 20;
-  border-bottom: 0.5px solid rgba(212, 175, 55, 0.3);
+  border-radius: 60px;
+  border: 0.5px solid rgba(212, 175, 55, 0.3);
   flex-wrap: wrap;
 }
 
 .navbar a {
   color: #d4c5a8;
   text-decoration: none;
-  padding: 6px 16px;
+  padding: 8px 14px;
   border-radius: 40px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: all 0.2s;
   background: rgba(30, 30, 40, 0.4);
 }
 
@@ -175,23 +165,24 @@ body::before {
   justify-content: center;
   align-items: center;
   z-index: 100;
-  gap: 30px;
+  gap: 24px;
+  padding: 20px;
 }
 
 .envelope-card {
-  width: 320px;
-  height: 240px;
+  width: 280px;
+  height: 210px;
   background: linear-gradient(135deg, #e5c378, #c8a15e);
-  border-radius: 36px;
+  border-radius: 32px;
   position: relative;
   cursor: pointer;
-  box-shadow: 0 30px 50px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4);
   animation: gentlePulse 1.8s infinite;
 }
 
 @keyframes gentlePulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.02); box-shadow: 0 40px 60px rgba(212, 175, 55, 0.3); }
+  50% { transform: scale(1.02); box-shadow: 0 25px 45px rgba(212, 175, 55, 0.3); }
   100% { transform: scale(1); }
 }
 
@@ -202,304 +193,264 @@ body::before {
   background: linear-gradient(135deg, #f0d48c, #d4af37);
   clip-path: polygon(0 0, 100% 0, 50% 58%);
   transform-origin: top;
-  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   z-index: 3;
-  border-radius: 36px 36px 0 0;
+  border-radius: 32px 32px 0 0;
 }
 
 .inner-message {
   position: absolute;
-  bottom: 20px;
+  bottom: 16px;
   left: 5%;
   width: 90%;
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(16px);
-  padding: 18px 12px;
-  border-radius: 28px;
+  padding: 14px 10px;
+  border-radius: 24px;
   text-align: center;
   transform: translateY(100%);
   opacity: 0;
-  transition: transform 0.6s 0.2s, opacity 0.5s 0.1s;
+  transition: transform 0.5s 0.2s, opacity 0.4s 0.1s;
   border: 0.5px solid #d4af37;
 }
 
 .envelope-card.open .envelope-flap { transform: rotateX(180deg); }
-.envelope-card.open .inner-message { transform: translateY(-85px); opacity: 1; }
+.envelope-card.open .inner-message { transform: translateY(-75px); opacity: 1; }
 
 .click-instruction {
   text-align: center;
   background: rgba(30, 30, 40, 0.7);
   backdrop-filter: blur(20px);
-  padding: 12px 24px;
-  border-radius: 60px;
+  padding: 10px 20px;
+  border-radius: 50px;
   border: 0.5px solid rgba(212, 175, 55, 0.5);
   animation: bounceHint 1.2s infinite;
 }
 
 @keyframes bounceHint {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
+  50% { transform: translateY(6px); }
 }
 
 .main-content { display: none; position: relative; z-index: 2; padding-bottom: 80px; }
-.section-card { padding: 50px 16px; max-width: 700px; margin: 0 auto; }
-.gold-text { color: #e5c890; font-family: 'Playfair Display', serif; font-weight: 700; }
+.section-card { padding: 8px 0; }
+.gold-text { color: #e5c890; font-family: 'Playfair Display', serif; font-weight: 700; text-align: center; margin-bottom: 16px; }
 
 /* ========== COUNTDOWN ========== */
 .countdown-box {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-  margin-top: 24px;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .countdown-item {
   background: rgba(20, 20, 28, 0.6);
   backdrop-filter: blur(12px);
-  padding: 14px 12px;
-  min-width: 75px;
-  border-radius: 32px;
+  padding: 12px 8px;
+  min-width: 65px;
+  border-radius: 24px;
   text-align: center;
   border: 0.5px solid rgba(212, 175, 55, 0.35);
 }
-.countdown-number { font-size: 2rem; font-weight: 700; color: #e8d29c; }
-.countdown-label { font-size: 10px; text-transform: uppercase; color: #b8a87a; }
+.countdown-number { font-size: 1.5rem; font-weight: 700; color: #e8d29c; }
+.countdown-label { font-size: 9px; text-transform: uppercase; color: #b8a87a; }
 
-/* ========== FOTO MEMPELAI - HORIZONTAL & BESAR ========== */
-.couple-horizontal {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  margin-top: 25px;
+/* ========== HORIZONTAL SCROLL (SWIPE) ========== */
+.horizontal-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 8px 0 16px 0;
 }
+.horizontal-scroll::-webkit-scrollbar { display: none; }
 
-.couple-card {
-  flex: 1;
-  min-width: 220px;
-  text-align: center;
+.scroll-item {
+  display: inline-block;
+  white-space: normal;
+  scroll-snap-align: start;
+  margin-right: 16px;
+  vertical-align: top;
+  width: 280px;
 }
+.scroll-item:first-child { margin-left: 16px; }
+.scroll-item:last-child { margin-right: 16px; }
 
-.photo-large {
+/* Foto mempelai carousel */
+.couple-photo {
   width: 100%;
-  max-width: 260px;
-  height: auto;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  border-radius: 32px;
-  cursor: pointer;
+  border-radius: 28px;
   border: 2px solid rgba(212, 175, 55, 0.5);
-  transition: all 0.3s ease;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-.photo-large:hover {
-  transform: scale(1.02);
-  border-color: #e5c890;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4);
-}
-
-/* ========== GALERI MASONRY (Instagram/TikTok Style) ========== */
-.gallery-masonry {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.gallery-item {
-  position: relative;
-  overflow: hidden;
+/* Galeri carousel */
+.gallery-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
   border-radius: 24px;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.gallery-item:hover {
-  transform: scale(1.02);
-}
-
-.gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.gallery-item:hover img {
-  transform: scale(1.05);
-}
-
-/* Ukuran berbeda untuk efek masonry */
-.gallery-item.span-2 {
-  grid-column: span 2;
-}
-
-.gallery-item.span-2-row {
-  grid-row: span 2;
-}
-
-.gallery-item.tall {
-  aspect-ratio: 1 / 1.2;
-}
-
-.gallery-item.wide {
-  aspect-ratio: 1.6 / 1;
-}
-
-.gallery-item.square {
-  aspect-ratio: 1 / 1;
+  border: 0.5px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* ========== VIRTUAL CANDLE ========== */
 .candle-section {
   text-align: center;
-  padding: 20px;
+  padding: 10px;
 }
 .candle-icon {
-  font-size: 48px;
+  font-size: 44px;
   cursor: pointer;
   transition: 0.2s;
   display: inline-block;
 }
-.candle-icon:hover { transform: scale(1.1); }
 .candle-count {
-  margin-top: 8px;
-  font-size: 12px;
+  margin-top: 6px;
+  font-size: 11px;
   color: #e5c890;
 }
 
 /* ========== GUESTBOOK ========== */
 .guestbook-list {
-  max-height: 400px;
+  max-height: 350px;
   overflow-y: auto;
-  margin: 15px 0;
-  padding-right: 8px;
+  margin: 12px 0;
+  padding-right: 6px;
 }
 .guestbook-item {
   background: rgba(25, 25, 35, 0.6);
   backdrop-filter: blur(12px);
-  border-radius: 28px;
-  padding: 14px 18px;
-  margin-bottom: 12px;
-  border-left: 4px solid #e5c890;
-  transition: 0.3s;
+  border-radius: 24px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border-left: 3px solid #e5c890;
 }
-.guestbook-item:hover { transform: translateX(5px); background: rgba(35, 35, 48, 0.75); }
-.guestbook-name { font-weight: 700; color: #e5c890; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-.guestbook-name::before { content: "💬"; }
-.guestbook-message { font-size: 13px; line-height: 1.4; color: #e8e2d4; }
+.guestbook-name { font-weight: 700; color: #e5c890; margin-bottom: 5px; display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.guestbook-name::before { content: "💬"; font-size: 11px; }
+.guestbook-message { font-size: 12px; line-height: 1.4; color: #e8e2d4; }
 
 .guestbook-input {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 18px;
+  gap: 10px;
+  margin-top: 15px;
 }
 .guestbook-input input, .guestbook-input textarea {
   background: rgba(30, 30, 40, 0.7);
   border: 0.5px solid rgba(212, 175, 55, 0.4);
-  border-radius: 32px;
+  border-radius: 28px;
   padding: 12px 16px;
   font-family: inherit;
+  font-size: 13px;
   color: #f0ede8;
 }
 .guestbook-input button {
   background: linear-gradient(135deg, #d4af37, #c8a15e);
   border: none;
   padding: 12px;
-  border-radius: 40px;
+  border-radius: 36px;
   font-weight: 600;
+  font-size: 13px;
   cursor: pointer;
-  transition: 0.2s;
 }
-.guestbook-input button:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(212, 175, 55, 0.3); }
 
 /* ========== AMPLOP DIGITAL ========== */
 .gift-box {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 12px;
   justify-content: center;
-  margin: 20px 0;
+  margin: 15px 0;
 }
 .gift-card {
   background: rgba(25, 25, 35, 0.6);
   backdrop-filter: blur(12px);
-  border-radius: 28px;
-  padding: 14px;
+  border-radius: 24px;
+  padding: 12px;
   text-align: center;
   flex: 1;
-  min-width: 120px;
+  min-width: 110px;
   border: 0.5px solid rgba(212, 175, 55, 0.35);
 }
 .copy-btn {
   background: rgba(229, 200, 144, 0.2);
   border: 0.5px solid #e5c890;
-  padding: 5px 12px;
+  padding: 5px 10px;
   border-radius: 30px;
   margin-top: 8px;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 10px;
   color: #e5c890;
 }
 
 /* ========== VISUALIZER ========== */
 .visualizer {
   position: fixed;
-  bottom: 90px;
-  right: 22px;
+  bottom: 85px;
+  right: 20px;
   display: flex;
   gap: 4px;
   align-items: flex-end;
-  height: 30px;
+  height: 28px;
   z-index: 31;
   opacity: 0;
-  transition: opacity 0.3s;
 }
 .visualizer.active { opacity: 1; }
 .visualizer-bar {
-  width: 4px;
+  width: 3px;
   background: #e5c890;
   border-radius: 2px;
-  transition: height 0.1s;
 }
 
 .music-player {
   position: fixed;
-  bottom: 22px;
-  right: 22px;
+  bottom: 20px;
+  right: 20px;
   background: rgba(212, 175, 55, 0.8);
   backdrop-filter: blur(12px);
-  width: 52px;
-  height: 52px;
-  border-radius: 32px;
+  width: 48px;
+  height: 48px;
+  border-radius: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 30;
-  font-size: 24px;
+  font-size: 22px;
 }
 
-/* ========== QR CODE ========== */
-.qr-section {
-  margin-top: 15px;
-  text-align: center;
+/* ========== BUTTON & MAP ========== */
+.btn-custom {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 0.5px solid #e5c890;
+  border-radius: 40px;
+  color: #e8e2d4;
+  text-decoration: none;
+  background: rgba(30, 30, 40, 0.6);
+  margin: 5px;
+  font-size: 12px;
 }
+.map-frame { width: 100%; height: 180px; border-radius: 24px; margin: 12px 0; border: none; }
 .qr-btn {
   background: rgba(30, 30, 40, 0.6);
   border: 0.5px solid #e5c890;
   padding: 8px 16px;
   border-radius: 40px;
-  font-size: 12px;
+  font-size: 11px;
   cursor: pointer;
   color: #e5c890;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 .qr-modal {
   position: fixed;
@@ -514,46 +465,63 @@ body::before {
   z-index: 300;
   visibility: hidden;
   opacity: 0;
-  transition: 0.2s;
 }
 .qr-modal.active { visibility: visible; opacity: 1; }
 .qr-content {
   background: white;
   padding: 20px;
-  border-radius: 32px;
+  border-radius: 28px;
   text-align: center;
 }
-
-.btn-custom {
-  display: inline-block;
-  padding: 8px 20px;
-  border: 0.5px solid #e5c890;
-  border-radius: 40px;
-  color: #e8e2d4;
-  text-decoration: none;
-  background: rgba(30, 30, 40, 0.6);
-  margin: 5px;
-  font-size: 12px;
-}
-.btn-custom:hover { background: #e5c890; color: #1a1a1a; }
-.map-frame { width: 100%; height: 200px; border-radius: 28px; margin: 15px 0; border: none; }
 
 /* ========== ANIMASI SCROLL ========== */
 .reveal {
   opacity: 0;
-  transform: translateY(40px) scale(0.96);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(25px);
+  transition: all 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 }
 .reveal.show {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
 
-@media (max-width: 550px) {
-  .couple-horizontal { gap: 25px; }
-  .photo-large { max-width: 180px; }
-  .gallery-masonry { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .countdown-number { font-size: 1.5rem; }
+/* ========== LIGHTBOX ========== */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 200;
+  cursor: pointer;
+}
+.lightbox.active { visibility: visible; opacity: 1; }
+.lightbox img { max-width: 90%; max-height: 85%; border-radius: 24px; }
+
+/* ========== DESKTOP ADAPTATION (TIDAK MEBLEBAR) ========== */
+@media (min-width: 768px) {
+  .main-content {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .glass-card {
+    margin: 20px auto;
+  }
+  .navbar {
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+  }
+  .scroll-item {
+    width: 320px;
+  }
 }
 </style>
 </head>
@@ -586,18 +554,20 @@ body::before {
     </div>
   </div>
   <div class="click-instruction">
-    <span>👇 TEKAN AMPLOP DI ATAS 👆</span>
+    <span>👇 TEKAN AMPLOP 👆</span>
     <small>Klik untuk membuka undangan</small>
   </div>
 </div>
 
 <div class="main-content" id="mainContent">
+  
+  <!-- HOME -->
   <div class="section-card" id="home">
-    <div class="glass-card reveal" style="padding:30px; text-align:center;">
+    <div class="glass-card reveal" style="text-align:center;">
       <h3 class="gold-text">ٱلسَّلَامُ عَلَيْكُمْ</h3>
-      <p style="margin:12px 0;">Dengan memohon rahmat Allah SWT, kami mengundang Bapak/Ibu/Saudara/i</p>
-      <h2 style="font-size:1.6rem; font-family:'Playfair Display';">Fikri Anugrah R.<br>&<br>Sindi Rosmiati</h2>
-      <p>Minggu, 05 April 2026</p>
+      <p style="margin:10px 0; font-size:13px;">Dengan memohon rahmat Allah SWT, kami mengundang Bapak/Ibu/Saudara/i</p>
+      <h2 style="font-size:1.4rem; font-family:'Playfair Display';">Fikri Anugrah R.<br>&<br>Sindi Rosmiati</h2>
+      <p style="margin:8px 0;">Minggu, 05 April 2026</p>
       <div class="countdown-box">
         <div class="countdown-item"><span class="countdown-number" id="days">00</span><div class="countdown-label">Hari</div></div>
         <div class="countdown-item"><span class="countdown-number" id="hours">00</span><div class="countdown-label">Jam</div></div>
@@ -607,46 +577,33 @@ body::before {
     </div>
   </div>
 
-  <!-- AYAT, HADIS, DOA & MUTIARA -->
+  <!-- AYAT & HADIS -->
   <div class="section-card">
-    <div class="glass-card reveal" style="padding:28px;">
-      <div style="text-align:center; margin-bottom:18px;">
-        <p style="font-style:italic;">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya..."</p>
-        <p style="margin-top:10px; font-size:13px; color:#e5c890;">— QS. Ar-Rum : 21 —</p>
-      </div>
-      <hr style="margin:18px 0; border-color:rgba(212,175,55,0.2);">
-      <div style="text-align:center;">
-        <p style="font-style:italic;">"Nikahilah wanita karena agamanya, niscaya beruntung."</p>
-        <p style="margin-top:6px; font-size:13px; color:#e5c890;">— HR. Bukhari & Muslim —</p>
-      </div>
-      <hr style="margin:18px 0; border-color:rgba(212,175,55,0.2);">
-      <div style="text-align:center;">
-        <p style="font-style:italic;">"بَارَكَ اللَّهُ لَكَ، وَبَارَكَ عَلَيْكَ، وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ"</p>
-        <p style="margin-top:8px;">"Semoga Allah memberkahi kalian berdua, memberkati pernikahan kalian, dan mengumpulkan kalian dalam kebaikan."</p>
-        <p style="margin-top:4px; font-size:11px; color:#e5c890;">— Doa Rasulullah SAW —</p>
-      </div>
-      <hr style="margin:18px 0; border-color:rgba(212,175,55,0.2);">
-      <div style="text-align:center;">
-        <p>✨ <strong>Cinta sejati</strong> bukan tentang menemukan seseorang yang sempurna,<br>tapi tentang belajar melihat ketidaksempurnaan dengan penuh kasih sayang. ✨</p>
-      </div>
-      <hr style="margin:18px 0; border-color:rgba(212,175,55,0.2);">
-      <div style="text-align:center;">
-        <p style="font-style:italic;">"وَجَعَلْنَاكُمْ أَزْوَاجًا"</p>
-        <p>"Dan Kami ciptakan kamu berpasang-pasangan."</p>
-        <p style="font-size:12px; color:#e5c890;">— QS. An-Naba' : 8 —</p>
-      </div>
-      <hr style="margin:18px 0; border-color:rgba(212,175,55,0.2);">
-      <div style="text-align:center;">
-        <p>🤍 <strong>Jazakumullah Khairan</strong> 🤍</p>
-        <p style="font-size:12px; margin-top:8px;">Kami ucapkan terima kasih atas doa restu dan kehadiran Bapak/Ibu sekalian.</p>
-      </div>
+    <div class="glass-card reveal" style="text-align:center;">
+      <p style="font-style:italic; font-size:13px;">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri..."</p>
+      <p style="margin-top:8px; font-size:11px; color:#e5c890;">— QS. Ar-Rum : 21 —</p>
+      <hr style="margin:15px 0; border-color:rgba(212,175,55,0.2);">
+      <p style="font-style:italic; font-size:13px;">"Nikahilah wanita karena agamanya, niscaya beruntung."</p>
+      <p style="margin-top:6px; font-size:11px; color:#e5c890;">— HR. Bukhari & Muslim —</p>
+      <hr style="margin:15px 0; border-color:rgba(212,175,55,0.2);">
+      <p style="font-style:italic; font-size:13px;">"بَارَكَ اللَّهُ لَكَ، وَبَارَكَ عَلَيْكَ، وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ"</p>
+      <p style="margin-top:6px; font-size:11px;">"Semoga Allah memberkahi kalian berdua..."</p>
+      <p style="margin-top:4px; font-size:10px; color:#e5c890;">— Doa Rasulullah SAW —</p>
+      <hr style="margin:15px 0; border-color:rgba(212,175,55,0.2);">
+      <p style="font-size:12px;">✨ <strong>Cinta sejati</strong> bukan tentang menemukan seseorang yang sempurna,<br>tapi tentang belajar melihat ketidaksempurnaan dengan penuh kasih sayang. ✨</p>
+      <hr style="margin:15px 0; border-color:rgba(212,175,55,0.2);">
+      <p style="font-style:italic; font-size:13px;">"وَجَعَلْنَاكُمْ أَزْوَاجًا"</p>
+      <p style="font-size:11px;">"Dan Kami ciptakan kamu berpasang-pasangan."</p>
+      <p style="font-size:10px; color:#e5c890;">— QS. An-Naba' : 8 —</p>
+      <hr style="margin:15px 0; border-color:rgba(212,175,55,0.2);">
+      <p>🤍 <strong>Jazakumullah Khairan</strong> 🤍</p>
     </div>
   </div>
 
   <!-- VIRTUAL CANDLE -->
   <div class="section-card">
-    <div class="glass-card reveal" style="padding:24px;">
-      <h3 class="gold-text" style="text-align:center;">🕯️ Nyalakan Lilin Doa</h3>
+    <div class="glass-card reveal" style="text-align:center;">
+      <h3 class="gold-text">🕯️ Nyalakan Lilin Doa</h3>
       <div class="candle-section">
         <div class="candle-icon" id="candleIcon">🕯️</div>
         <div class="candle-count"><span id="candleCount">0</span> orang telah mendoakan</div>
@@ -654,51 +611,52 @@ body::before {
     </div>
   </div>
 
-  <!-- MEMPELAI - HORIZONTAL & BESAR -->
+  <!-- FOTO MEMPELAI - SWIPE HORIZONTAL -->
   <div class="section-card" id="couple">
-    <div class="glass-card reveal" style="padding:28px; text-align:center;">
+    <div class="glass-card reveal">
       <h3 class="gold-text">🌿 Mempelai 🌿</h3>
-      <div class="couple-horizontal">
-        <div class="couple-card">
-          <img src="cowo.jpg" class="photo-large" id="imgPria">
-          <h3 class="gold-text" style="margin-top:16px;">Fikri Anugrah R.</h3>
-          <p>Putra Bapak Heri Nugraha & Ibu Nurhayati</p>
+      <div class="horizontal-scroll" id="coupleScroll">
+        <div class="scroll-item">
+          <img src="cowo.jpg" class="couple-photo" id="imgPria">
+          <h3 class="gold-text" style="margin-top:12px; font-size:18px;">Fikri Anugrah R.</h3>
+          <p style="font-size:12px;">Putra Bapak Heri Nugraha & Ibu Nurhayati</p>
         </div>
-        <div class="couple-card">
-          <img src="cewe.jpg" class="photo-large" id="imgWanita">
-          <h3 class="gold-text" style="margin-top:16px;">Sindi Rosmiati</h3>
-          <p>Putri Bapak Enjang Supriyadi & Ibu Elis Herawati</p>
+        <div class="scroll-item">
+          <img src="cewe.jpg" class="couple-photo" id="imgWanita">
+          <h3 class="gold-text" style="margin-top:12px; font-size:18px;">Sindi Rosmiati</h3>
+          <p style="font-size:12px;">Putri Bapak Enjang Supriyadi & Ibu Elis Herawati</p>
         </div>
       </div>
+      <p style="text-align:center; font-size:10px; margin-top:12px; opacity:0.6;">↜ Geser ke samping ↝</p>
     </div>
   </div>
 
-  <!-- GALERI MASONRY (Instagram/TikTok Style) -->
+  <!-- GALERI - SWIPE HORIZONTAL -->
   <div class="section-card" id="gallery">
-    <div class="glass-card reveal" style="padding:28px;">
-      <h3 class="gold-text" style="text-align:center;">🌸 Galeri Kenangan</h3>
-      <div class="gallery-masonry" id="galleryGrid"></div>
-      <p style="text-align:center; font-size:11px; margin-top:16px;">Klik foto untuk memperbesar</p>
+    <div class="glass-card reveal">
+      <h3 class="gold-text">🌸 Galeri Kenangan</h3>
+      <div class="horizontal-scroll" id="galleryScroll"></div>
+      <p style="text-align:center; font-size:10px; margin-top:12px; opacity:0.6;">↜ Geser untuk lihat foto lainnya ↝</p>
     </div>
   </div>
 
   <!-- AMPLOP DIGITAL -->
   <div class="section-card" id="gift">
-    <div class="glass-card reveal" style="padding:28px;">
-      <h3 class="gold-text" style="text-align:center;">🎁 Amplop Digital</h3>
+    <div class="glass-card reveal">
+      <h3 class="gold-text">🎁 Amplop Digital</h3>
       <div class="gift-box">
         <div class="gift-card"><strong>💳 BCA</strong><p>1234 5678 9012 3456</p><p>a.n. Fikri Anugrah</p><button class="copy-btn" onclick="copyText('1234567890123456')">Salin</button></div>
         <div class="gift-card"><strong>🏦 Mandiri</strong><p>1234 5678 9012 3456</p><p>a.n. Sindi Rosmiati</p><button class="copy-btn" onclick="copyText('1234567890123456')">Salin</button></div>
         <div class="gift-card"><strong>🏧 BRI</strong><p>1234 5678 9012 3456</p><p>a.n. Fikri & Sindi</p><button class="copy-btn" onclick="copyText('1234567890123456')">Salin</button></div>
-        <div class="gift-card"><strong>📱 QRIS</strong><img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=QRIS%20Fikri%20Sindi" style="width:70px; margin:8px 0;"><button class="copy-btn" onclick="copyText('QRIS Fikri Sindi')">Salin QRIS</button></div>
+        <div class="gift-card"><strong>📱 QRIS</strong><img src="https://api.qrserver.com/v1/create-qr-code/?size=70x70&data=QRIS%20Fikri%20Sindi" style="width:60px; margin:6px 0;"><button class="copy-btn" onclick="copyText('QRIS Fikri Sindi')">Salin QRIS</button></div>
       </div>
     </div>
   </div>
 
   <!-- GUESTBOOK -->
   <div class="section-card" id="guest">
-    <div class="glass-card reveal" style="padding:28px;">
-      <h3 class="gold-text" style="text-align:center;">💬 Kirim Ucapan & Doa</h3>
+    <div class="glass-card reveal">
+      <h3 class="gold-text">💬 Kirim Ucapan & Doa</h3>
       <div id="guestbookList" class="guestbook-list"></div>
       <div class="guestbook-input">
         <input type="text" id="guestName" placeholder="Nama Anda">
@@ -710,43 +668,40 @@ body::before {
 
   <!-- LOKASI -->
   <div class="section-card" id="location">
-    <div class="glass-card reveal" style="padding:28px; text-align:center;">
+    <div class="glass-card reveal" style="text-align:center;">
       <h3 class="gold-text">📍 Lokasi Acara</h3>
-      <p>Kp. Cianca RT 001/008, Desa Cisomang Barat<br>Cikalong Wetan, Bandung Barat</p>
+      <p style="font-size:12px;">Kp. Cianca RT 001/008, Desa Cisomang Barat<br>Cikalong Wetan, Bandung Barat</p>
       <iframe class="map-frame" src="https://www.google.com/maps?q=Cisomang+Barat+Cikalong+Wetan&output=embed"></iframe>
       <a href="https://maps.app.goo.gl/6fNTUMAbQiqNRJ566" target="_blank" class="btn-custom">🗺️ Buka Maps</a>
       <a href="https://wa.me/6282249786900?text=Assalamualaikum%2C%20saya%20akan%20hadir" class="btn-custom">📩 Konfirmasi Hadir</a>
-      <p style="margin-top:15px; font-size:11px;"><strong>Petunjuk Arah:</strong><br>Dari Bandung ambil jalur Cikalong Wetan, setelah SPBU belok kanan ke Cisomang, ikuti jalan 2km, lokasi samping Masjid Al-Ikhlas.</p>
+      <p style="margin-top:12px; font-size:10px;"><strong>Petunjuk Arah:</strong><br>Dari Bandung ambil jalur Cikalong Wetan, setelah SPBU belok kanan ke Cisomang, ikuti jalan 2km, lokasi samping Masjid Al-Ikhlas.</p>
       <a href="#" id="calendarBtn" class="btn-custom">📅 Simpan ke Google Calendar</a>
-      
-      <div class="qr-section">
+      <div style="margin-top:15px;">
         <button class="qr-btn" id="showQrBtn">📱 Download QR Undangan</button>
       </div>
     </div>
   </div>
   
-  <div style="text-align:center; margin:20px; font-size:11px; opacity:0.6;">💛 Kami yang berbahagia, Fikri & Sindi 💛</div>
+  <div style="text-align:center; margin:20px; font-size:10px; opacity:0.5;">💛 Kami yang berbahagia, Fikri & Sindi 💛</div>
 </div>
 
 <!-- QR MODAL -->
 <div class="qr-modal" id="qrModal">
   <div class="qr-content">
-    <img id="qrCodeImg" src="" width="200" height="200">
-    <p style="margin-top:10px;">Scan QR untuk buka undangan</p>
+    <img id="qrCodeImg" src="" width="180" height="180">
+    <p style="margin-top:8px;">Scan QR untuk buka undangan</p>
     <button class="btn-custom" onclick="downloadQR()">Download QR</button>
     <button class="btn-custom" onclick="closeQR()">Tutup</button>
   </div>
 </div>
 
 <div class="lightbox" id="lightbox" onclick="closeLightbox()"><img id="lightboxImg" src=""></div>
-
-<!-- VISUALIZER -->
 <div class="visualizer" id="visualizer"></div>
 <audio id="weddingAudio" loop><source src="musik.mp3" type="audio/mpeg"></audio>
 <div class="music-player" id="musicBtn">🎵</div>
 
 <script>
-// ========== PRELOADER ==========
+// PRELOADER
 const preloader = document.getElementById('preloader');
 const progressBar = document.getElementById('preloaderProgress');
 let progress = 0;
@@ -755,12 +710,12 @@ const preloaderInterval = setInterval(() => {
   if (progress >= 100) {
     progress = 100;
     clearInterval(preloaderInterval);
-    setTimeout(() => { preloader.classList.add('hide'); }, 500);
+    setTimeout(() => preloader.classList.add('hide'), 500);
   }
   progressBar.style.width = Math.min(progress, 100) + '%';
 }, 200);
 
-// ========== AMPLOP ==========
+// AMPLOP
 const coverScreen = document.getElementById('coverScreen');
 const envelopeCard = document.getElementById('envelope');
 const mainContent = document.getElementById('mainContent');
@@ -770,11 +725,11 @@ let musicPlaying = false;
 let isOpened = false;
 
 function simpleConfetti() {
-  for(let i = 0; i < 60; i++) {
+  for(let i = 0; i < 50; i++) {
     const conf = document.createElement('div');
     conf.style.position = 'fixed';
-    conf.style.width = '8px';
-    conf.style.height = '8px';
+    conf.style.width = '6px';
+    conf.style.height = '6px';
     conf.style.backgroundColor = ['#e5c890', '#b28bd0', '#d4af37'][Math.floor(Math.random() * 3)];
     conf.style.borderRadius = '50%';
     conf.style.left = Math.random() * window.innerWidth + 'px';
@@ -786,15 +741,9 @@ function simpleConfetti() {
     const fall = setInterval(() => {
       posY += 5;
       conf.style.top = posY + 'px';
-      if(posY > window.innerHeight) {
-        clearInterval(fall);
-        conf.remove();
-      }
+      if(posY > window.innerHeight) { clearInterval(fall); conf.remove(); }
     }, 20);
-    setTimeout(() => {
-      clearInterval(fall);
-      if(conf) conf.remove();
-    }, 2000);
+    setTimeout(() => { clearInterval(fall); if(conf) conf.remove(); }, 2000);
   }
 }
 
@@ -810,10 +759,7 @@ function playMusic() {
     musicPlaying = true;
     musicBtn.innerHTML = "🎶";
     startVisualizer();
-  }).catch(() => {
-    musicPlaying = false;
-    musicBtn.innerHTML = "🎵";
-  });
+  }).catch(() => { musicPlaying = false; musicBtn.innerHTML = "🎵"; });
 }
 
 // VISUALIZER
@@ -822,7 +768,7 @@ let visualizerInterval;
 function startVisualizer() {
   if (!visualizer) return;
   visualizer.classList.add('active');
-  for(let i = 0; i < 16; i++) {
+  for(let i = 0; i < 12; i++) {
     const bar = document.createElement('div');
     bar.className = 'visualizer-bar';
     bar.style.height = '4px';
@@ -831,7 +777,7 @@ function startVisualizer() {
   visualizerInterval = setInterval(() => {
     if (!musicPlaying) return;
     document.querySelectorAll('.visualizer-bar').forEach(bar => {
-      bar.style.height = Math.random() * 24 + 4 + 'px';
+      bar.style.height = Math.random() * 20 + 4 + 'px';
     });
   }, 100);
 }
@@ -841,7 +787,7 @@ function stopVisualizer() {
 }
 
 function toggleMusic() {
-  if (audioEl.paused) { playMusic(); }
+  if (audioEl.paused) playMusic();
   else { audioEl.pause(); musicPlaying = false; musicBtn.innerHTML = "🎵"; stopVisualizer(); }
 }
 
@@ -860,31 +806,25 @@ function openInvitation() {
 }
 
 envelopeCard.addEventListener('click', openInvitation);
-musicBtn.addEventListener('click', function(e) {
-  e.stopPropagation();
-  if (!isOpened) openInvitation();
-  else toggleMusic();
-});
+musicBtn.addEventListener('click', (e) => { e.stopPropagation(); if (!isOpened) openInvitation(); else toggleMusic(); });
 
-// ========== COUNTDOWN ==========
+// COUNTDOWN
 const targetDate = new Date("April 5, 2026 08:00:00").getTime();
 setInterval(() => {
   const now = new Date().getTime();
   const diff = targetDate - now;
   if (diff < 0) {
-    document.getElementById('days').innerText = '00';
-    document.getElementById('hours').innerText = '00';
-    document.getElementById('minutes').innerText = '00';
-    document.getElementById('seconds').innerText = '00';
+    document.getElementById('days').innerText = '00'; document.getElementById('hours').innerText = '00';
+    document.getElementById('minutes').innerText = '00'; document.getElementById('seconds').innerText = '00';
     return;
   }
-  document.getElementById('days').innerText = Math.floor(diff / 86400000).toString().padStart(2, '0');
-  document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000).toString().padStart(2, '0');
-  document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
-  document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+  document.getElementById('days').innerText = Math.floor(diff / 86400000).toString().padStart(2,'0');
+  document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000).toString().padStart(2,'0');
+  document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000).toString().padStart(2,'0');
+  document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000).toString().padStart(2,'0');
 }, 1000);
 
-// ========== VIRTUAL CANDLE ==========
+// VIRTUAL CANDLE
 let candleCount = localStorage.getItem('candleCount') ? parseInt(localStorage.getItem('candleCount')) : 0;
 document.getElementById('candleCount').innerText = candleCount;
 document.getElementById('candleIcon').addEventListener('click', () => {
@@ -894,47 +834,32 @@ document.getElementById('candleIcon').addEventListener('click', () => {
   simpleConfetti();
 });
 
-// ========== GALERI MASONRY (Instagram/TikTok Style) ==========
-const galleryData = [
-  { src: "berdua.jpg", size: "wide", class: "wide" },
-  { src: "cowo.jpg", size: "square", class: "square" },
-  { src: "cewe.jpg", size: "square", class: "square" },
-  { src: "berdua.jpg", size: "tall", class: "tall" },
-  { src: "cowo.jpg", size: "square", class: "square" },
-  { src: "cewe.jpg", size: "wide", class: "wide" },
-  { src: "berdua.jpg", size: "square", class: "square" },
-  { src: "cowo.jpg", size: "tall", class: "tall" },
-  { src: "cewe.jpg", size: "square", class: "square" }
-];
+// GALERI (SWIPE HORIZONTAL)
+const galleryImages = ["berdua.jpg", "cowo.jpg", "cewe.jpg", "berdua.jpg", "cowo.jpg", "cewe.jpg", "berdua.jpg"];
+const galleryScroll = document.getElementById('galleryScroll');
+galleryImages.forEach((src, idx) => {
+  const div = document.createElement('div');
+  div.className = 'scroll-item';
+  const img = document.createElement('img');
+  img.src = src;
+  img.className = 'gallery-photo';
+  img.onerror = () => img.src = 'https://placehold.co/400x400/2a2a2a/e5c890?text=Foto';
+  img.onclick = () => {
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightbox').classList.add('active');
+  };
+  div.appendChild(img);
+  galleryScroll.appendChild(div);
+});
 
-const galleryGrid = document.getElementById('galleryGrid');
-function renderMasonryGallery() {
-  galleryGrid.innerHTML = '';
-  galleryData.forEach((item, idx) => {
-    const div = document.createElement('div');
-    div.className = `gallery-item ${item.class}`;
-    const img = document.createElement('img');
-    img.src = item.src;
-    img.alt = `Galeri ${idx+1}`;
-    img.onerror = () => img.src = 'https://placehold.co/400x400/2a2a2a/e5c890?text=Foto';
-    img.onclick = () => {
-      document.getElementById('lightboxImg').src = img.src;
-      document.getElementById('lightbox').classList.add('active');
-    };
-    div.appendChild(img);
-    galleryGrid.appendChild(div);
-  });
-}
-renderMasonryGallery();
-
-// ========== GUESTBOOK ==========
+// GUESTBOOK
 let messages = [];
 function loadMessages() {
-  const saved = localStorage.getItem('wedding_messages_premium');
+  const saved = localStorage.getItem('wedding_messages_mobile');
   if (saved) messages = JSON.parse(saved);
   else messages = [
     { name: "🌹 Keluarga Besar", msg: "Selamat menempuh hidup baru, semoga sakinah mawaddah warahmah! Barakallah." },
-    { name: "✨ Sahabat Sejati", msg: "Happy wedding! Langgeng selalu berdua, jadi keluarga yang bahagia dunia akhirat 💕" }
+    { name: "✨ Sahabat Sejati", msg: "Happy wedding! Langgeng selalu berdua 💕" }
   ];
   renderMessages();
 }
@@ -947,14 +872,14 @@ function renderMessages() {
       <div class="guestbook-message">${escapeHtml(m.msg)}</div>
     </div>
   `).join('');
-  localStorage.setItem('wedding_messages_premium', JSON.stringify(messages));
+  localStorage.setItem('wedding_messages_mobile', JSON.stringify(messages));
 }
 function escapeHtml(str) { return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
 function addMessage() {
   const name = document.getElementById('guestName').value.trim();
   const msg = document.getElementById('guestMessage').value.trim();
   if (!name || !msg) { alert('Isi nama dan ucapan dulu ya 😊'); return; }
-  messages.push({ name: name.slice(0, 30), msg: msg.slice(0, 300) });
+  messages.push({ name: name.slice(0, 30), msg: msg.slice(0, 250) });
   renderMessages();
   document.getElementById('guestName').value = '';
   document.getElementById('guestMessage').value = '';
@@ -963,11 +888,11 @@ function addMessage() {
 window.addMessage = addMessage;
 window.copyText = (text) => { navigator.clipboard.writeText(text); alert('Berhasil disalin!'); };
 
-// ========== QR CODE ==========
+// QR CODE
 const qrModal = document.getElementById('qrModal');
 document.getElementById('showQrBtn')?.addEventListener('click', () => {
   const url = window.location.href;
-  document.getElementById('qrCodeImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
+  document.getElementById('qrCodeImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(url)}`;
   qrModal.classList.add('active');
 });
 function closeQR() { qrModal.classList.remove('active'); }
@@ -980,14 +905,14 @@ function downloadQR() {
 window.closeQR = closeQR;
 window.downloadQR = downloadQR;
 
-// ========== CALENDAR ==========
+// CALENDAR
 document.getElementById('calendarBtn')?.addEventListener('click', (e) => {
   e.preventDefault();
   const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('Pernikahan Fikri & Sindi')}&dates=20260405T080000/20260405T120000&details=${encodeURIComponent('Akad & Resepsi di Kediaman Mempelai Wanita')}&location=${encodeURIComponent('Kp. Cianca, Cisomang Barat, Bandung Barat')}&ctz=Asia/Jakarta`;
   window.open(url, '_blank');
 });
 
-// ========== SCROLL REVEAL ==========
+// SCROLL REVEAL
 const revealElements = document.querySelectorAll('.reveal');
 function checkReveal() {
   const windowHeight = window.innerHeight;
@@ -998,11 +923,11 @@ function checkReveal() {
 window.addEventListener('scroll', checkReveal);
 window.addEventListener('load', () => { checkReveal(); loadMessages(); });
 
-// ========== NAVIGATION ==========
+// NAVIGATION
 const sections = document.querySelectorAll('.section-card');
 const navLinks = document.querySelectorAll('.nav-link');
 function onScroll() {
-  let pos = window.scrollY + 120;
+  let pos = window.scrollY + 100;
   sections.forEach(sec => {
     if (pos >= sec.offsetTop && pos < sec.offsetTop + sec.offsetHeight) {
       const id = sec.getAttribute('id');
@@ -1012,7 +937,6 @@ function onScroll() {
       });
     }
   });
-  if (window.scrollY < 100) { navLinks.forEach(l => l.classList.remove('active')); if(navLinks[0]) navLinks[0].classList.add('active'); }
 }
 window.addEventListener('scroll', onScroll);
 window.addEventListener('load', onScroll);
@@ -1025,7 +949,7 @@ document.querySelectorAll('.nav-link').forEach(anchor => {
   });
 });
 
-// Lightbox
+// LIGHTBOX
 function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
 window.closeLightbox = closeLightbox;
 
