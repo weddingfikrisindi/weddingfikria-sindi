@@ -13,7 +13,6 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ========== MOBILE-FIRST ========== */
 body {
   background: #0a0a0c;
   background-image: 
@@ -24,7 +23,6 @@ body {
   color: #f0ede8;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  max-width: 100vw;
 }
 
 body::before {
@@ -39,13 +37,101 @@ body::before {
   z-index: 0;
 }
 
+/* ========== SPLASH SCREEN ========== */
+.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #0a0a0c 0%, #14141a 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.splash-screen.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.splash-logo {
+  width: 130px;
+  height: 130px;
+  background: linear-gradient(135deg, #e5c890, #c8a15e);
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 35px;
+  animation: splashPulse 1.2s infinite alternate, splashFloat 2s ease-in-out infinite;
+  box-shadow: 0 0 40px rgba(229, 200, 144, 0.5);
+}
+
+.splash-logo span {
+  font-size: 62px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  color: #0a0a0c;
+  letter-spacing: 2px;
+}
+
+@keyframes splashPulse {
+  0% { transform: scale(1); box-shadow: 0 0 20px rgba(229, 200, 144, 0.4); }
+  100% { transform: scale(1.05); box-shadow: 0 0 50px rgba(229, 200, 144, 0.7); }
+}
+
+@keyframes splashFloat {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-10px); }
+}
+
+.splash-title {
+  font-size: 15px;
+  letter-spacing: 5px;
+  color: #e5c890;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.splash-names {
+  font-size: 28px;
+  font-family: 'Playfair Display', serif;
+  color: white;
+  margin-bottom: 45px;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.splash-names span {
+  color: #e5c890;
+}
+
+.splash-progress {
+  width: 200px;
+  height: 3px;
+  background: rgba(229, 200, 144, 0.3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.splash-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #e5c890, #d4af37);
+  transition: width 0.3s ease;
+}
+
 /* ========== PRELOADER ========== */
 .preloader {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: #0a0a0c;
   display: flex;
   flex-direction: column;
@@ -61,38 +147,39 @@ body::before {
 }
 
 .preloader-logo {
-  width: 70px;
-  height: 70px;
-  border: 2px solid #e5c890;
+  width: 90px;
+  height: 90px;
+  border: 3px solid #e5c890;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
   animation: pulseLogo 1.5s infinite;
 }
 
 .preloader-logo span {
-  font-size: 28px;
+  font-size: 38px;
   font-family: 'Playfair Display', serif;
   color: #e5c890;
+  font-weight: 700;
 }
 
 @keyframes pulseLogo {
   0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(229, 200, 144, 0.4); }
-  70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(229, 200, 144, 0); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(229, 200, 144, 0); }
   100% { transform: scale(0.95); }
 }
 
 .preloader-text {
-  font-size: 12px;
-  letter-spacing: 2px;
+  font-size: 13px;
+  letter-spacing: 3px;
   color: #e5c890;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
 .preloader-bar {
-  width: 160px;
+  width: 180px;
   height: 2px;
   background: rgba(229, 200, 144, 0.3);
   border-radius: 2px;
@@ -117,7 +204,7 @@ body::before {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* ========== NAVBAR MOBILE ========== */
+/* ========== NAVBAR BOTTOM ========== */
 .navbar {
   position: fixed;
   bottom: 16px;
@@ -142,7 +229,6 @@ body::before {
   border-radius: 40px;
   font-size: 11px;
   font-weight: 500;
-  transition: all 0.2s;
   background: rgba(30, 30, 40, 0.4);
 }
 
@@ -256,7 +342,7 @@ body::before {
 .countdown-number { font-size: 1.5rem; font-weight: 700; color: #e8d29c; }
 .countdown-label { font-size: 9px; text-transform: uppercase; color: #b8a87a; }
 
-/* ========== HORIZONTAL SCROLL (SWIPE) ========== */
+/* ========== HORIZONTAL SCROLL ========== */
 .horizontal-scroll {
   overflow-x: auto;
   overflow-y: hidden;
@@ -267,7 +353,6 @@ body::before {
   padding: 8px 0 16px 0;
 }
 .horizontal-scroll::-webkit-scrollbar { display: none; }
-
 .scroll-item {
   display: inline-block;
   white-space: normal;
@@ -279,7 +364,7 @@ body::before {
 .scroll-item:first-child { margin-left: 16px; }
 .scroll-item:last-child { margin-right: 16px; }
 
-/* Foto mempelai carousel */
+/* Foto mempelai */
 .couple-photo {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -290,33 +375,86 @@ body::before {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Galeri carousel */
-.gallery-photo {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 24px;
-  cursor: pointer;
-  border: 0.5px solid rgba(212, 175, 55, 0.35);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+/* ========== GALERI INSTAGRAM STYLE ========== */
+.instagram-grid {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
-/* ========== VIRTUAL CANDLE ========== */
-.candle-section {
-  text-align: center;
-  padding: 10px;
-}
-.candle-icon {
-  font-size: 44px;
+.instagram-main {
+  flex: 1;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  overflow: hidden;
   cursor: pointer;
-  transition: 0.2s;
-  display: inline-block;
 }
-.candle-count {
-  margin-top: 6px;
-  font-size: 11px;
-  color: #e5c890;
+
+.instagram-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
 }
+
+.instagram-main:hover img { transform: scale(1.02); }
+
+.instagram-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.instagram-side-item {
+  flex: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.instagram-side-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.instagram-side-item:hover img { transform: scale(1.02); }
+
+.gallery-horizontal {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 8px;
+}
+
+.gallery-horizontal::-webkit-scrollbar { display: none; }
+
+.gallery-horizontal-item {
+  flex-shrink: 0;
+  width: 110px;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.gallery-horizontal-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.gallery-horizontal-item:hover img { transform: scale(1.02); }
+
+/* ========== VIRTUAL CANDLE ========== */
+.candle-section { text-align: center; padding: 10px; }
+.candle-icon { font-size: 48px; cursor: pointer; display: inline-block; transition: 0.2s; }
+.candle-icon:hover { transform: scale(1.1); }
+.candle-count { margin-top: 8px; font-size: 12px; color: #e5c890; }
 
 /* ========== GUESTBOOK ========== */
 .guestbook-list {
@@ -333,7 +471,7 @@ body::before {
   margin-bottom: 10px;
   border-left: 3px solid #e5c890;
 }
-.guestbook-name { font-weight: 700; color: #e5c890; margin-bottom: 5px; display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.guestbook-name { font-weight: 700; color: #e5c890; margin-bottom: 5px; display: flex; gap: 6px; font-size: 13px; }
 .guestbook-name::before { content: "💬"; font-size: 11px; }
 .guestbook-message { font-size: 12px; line-height: 1.4; color: #e8e2d4; }
 
@@ -358,7 +496,6 @@ body::before {
   padding: 12px;
   border-radius: 36px;
   font-weight: 600;
-  font-size: 13px;
   cursor: pointer;
 }
 
@@ -404,11 +541,7 @@ body::before {
   opacity: 0;
 }
 .visualizer.active { opacity: 1; }
-.visualizer-bar {
-  width: 3px;
-  background: #e5c890;
-  border-radius: 2px;
-}
+.visualizer-bar { width: 3px; background: #e5c890; border-radius: 2px; }
 
 .music-player {
   position: fixed;
@@ -448,9 +581,6 @@ body::before {
   font-size: 11px;
   cursor: pointer;
   color: #e5c890;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
 }
 .qr-modal {
   position: fixed;
@@ -467,23 +597,7 @@ body::before {
   opacity: 0;
 }
 .qr-modal.active { visibility: visible; opacity: 1; }
-.qr-content {
-  background: white;
-  padding: 20px;
-  border-radius: 28px;
-  text-align: center;
-}
-
-/* ========== ANIMASI SCROLL ========== */
-.reveal {
-  opacity: 0;
-  transform: translateY(25px);
-  transition: all 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-}
-.reveal.show {
-  opacity: 1;
-  transform: translateY(0);
-}
+.qr-content { background: white; padding: 20px; border-radius: 28px; text-align: center; }
 
 /* ========== LIGHTBOX ========== */
 .lightbox {
@@ -492,7 +606,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.9);
+  background: rgba(0,0,0,0.95);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -504,28 +618,29 @@ body::before {
 .lightbox.active { visibility: visible; opacity: 1; }
 .lightbox img { max-width: 90%; max-height: 85%; border-radius: 24px; }
 
-/* ========== DESKTOP ADAPTATION (TIDAK MEBLEBAR) ========== */
+/* ========== ANIMASI SCROLL ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: all 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+.reveal.show { opacity: 1; transform: translateY(0); }
+
 @media (min-width: 768px) {
-  .main-content {
-    max-width: 480px;
-    margin: 0 auto;
-  }
-  .glass-card {
-    margin: 20px auto;
-  }
-  .navbar {
-    max-width: 480px;
-    left: 50%;
-    transform: translateX(-50%);
-    right: auto;
-  }
-  .scroll-item {
-    width: 320px;
-  }
+  .main-content { max-width: 480px; margin: 0 auto; }
+  .navbar { max-width: 480px; left: 50%; transform: translateX(-50%); right: auto; }
 }
 </style>
 </head>
 <body>
+
+<!-- SPLASH SCREEN -->
+<div class="splash-screen" id="splashScreen">
+  <div class="splash-logo"><span>F&S</span></div>
+  <div class="splash-title">THE WEDDING OF</div>
+  <div class="splash-names">Fikri <span>&</span> Sindi</div>
+  <div class="splash-progress"><div class="splash-progress-fill" id="splashProgress"></div></div>
+</div>
 
 <!-- PRELOADER -->
 <div class="preloader" id="preloader">
@@ -611,7 +726,7 @@ body::before {
     </div>
   </div>
 
-  <!-- FOTO MEMPELAI - SWIPE HORIZONTAL -->
+  <!-- FOTO MEMPELAI - SWIPE -->
   <div class="section-card" id="couple">
     <div class="glass-card reveal">
       <h3 class="gold-text">🌿 Mempelai 🌿</h3>
@@ -631,12 +746,12 @@ body::before {
     </div>
   </div>
 
-  <!-- GALERI - SWIPE HORIZONTAL -->
+  <!-- GALERI INSTAGRAM STYLE -->
   <div class="section-card" id="gallery">
     <div class="glass-card reveal">
       <h3 class="gold-text">🌸 Galeri Kenangan</h3>
-      <div class="horizontal-scroll" id="galleryScroll"></div>
-      <p style="text-align:center; font-size:10px; margin-top:12px; opacity:0.6;">↜ Geser untuk lihat foto lainnya ↝</p>
+      <div id="instagramGallery"></div>
+      <p style="text-align:center; font-size:10px; margin-top:12px; opacity:0.6;">↜ Geser untuk lihat foto lainnya | Klik foto untuk memperbesar ↝</p>
     </div>
   </div>
 
@@ -685,37 +800,43 @@ body::before {
   <div style="text-align:center; margin:20px; font-size:10px; opacity:0.5;">💛 Kami yang berbahagia, Fikri & Sindi 💛</div>
 </div>
 
-<!-- QR MODAL -->
-<div class="qr-modal" id="qrModal">
-  <div class="qr-content">
-    <img id="qrCodeImg" src="" width="180" height="180">
-    <p style="margin-top:8px;">Scan QR untuk buka undangan</p>
-    <button class="btn-custom" onclick="downloadQR()">Download QR</button>
-    <button class="btn-custom" onclick="closeQR()">Tutup</button>
-  </div>
-</div>
-
+<!-- MODALS -->
+<div class="qr-modal" id="qrModal"><div class="qr-content"><img id="qrCodeImg" src="" width="180" height="180"><p style="margin-top:8px;">Scan QR untuk buka undangan</p><button class="btn-custom" onclick="downloadQR()">Download QR</button><button class="btn-custom" onclick="closeQR()">Tutup</button></div></div>
 <div class="lightbox" id="lightbox" onclick="closeLightbox()"><img id="lightboxImg" src=""></div>
 <div class="visualizer" id="visualizer"></div>
 <audio id="weddingAudio" loop><source src="musik.mp3" type="audio/mpeg"></audio>
 <div class="music-player" id="musicBtn">🎵</div>
 
 <script>
-// PRELOADER
-const preloader = document.getElementById('preloader');
-const progressBar = document.getElementById('preloaderProgress');
-let progress = 0;
-const preloaderInterval = setInterval(() => {
-  progress += Math.random() * 15;
-  if (progress >= 100) {
-    progress = 100;
-    clearInterval(preloaderInterval);
-    setTimeout(() => preloader.classList.add('hide'), 500);
+// ========== SPLASH SCREEN ==========
+const splashScreen = document.getElementById('splashScreen');
+const splashProgress = document.getElementById('splashProgress');
+let splashPercent = 0;
+const splashInterval = setInterval(() => {
+  splashPercent += Math.random() * 20;
+  if (splashPercent >= 100) {
+    splashPercent = 100;
+    clearInterval(splashInterval);
+    setTimeout(() => splashScreen.classList.add('hide'), 500);
   }
-  progressBar.style.width = Math.min(progress, 100) + '%';
+  splashProgress.style.width = Math.min(splashPercent, 100) + '%';
 }, 200);
 
-// AMPLOP
+// ========== PRELOADER ==========
+const preloader = document.getElementById('preloader');
+const preloaderProgress = document.getElementById('preloaderProgress');
+let preloadPercent = 0;
+const preloadInterval = setInterval(() => {
+  preloadPercent += Math.random() * 15;
+  if (preloadPercent >= 100) {
+    preloadPercent = 100;
+    clearInterval(preloadInterval);
+    setTimeout(() => preloader.classList.add('hide'), 500);
+  }
+  preloaderProgress.style.width = Math.min(preloadPercent, 100) + '%';
+}, 200);
+
+// ========== AMPLOP ==========
 const coverScreen = document.getElementById('coverScreen');
 const envelopeCard = document.getElementById('envelope');
 const mainContent = document.getElementById('mainContent');
@@ -725,11 +846,11 @@ let musicPlaying = false;
 let isOpened = false;
 
 function simpleConfetti() {
-  for(let i = 0; i < 50; i++) {
+  for(let i = 0; i < 60; i++) {
     const conf = document.createElement('div');
     conf.style.position = 'fixed';
-    conf.style.width = '6px';
-    conf.style.height = '6px';
+    conf.style.width = '7px';
+    conf.style.height = '7px';
     conf.style.backgroundColor = ['#e5c890', '#b28bd0', '#d4af37'][Math.floor(Math.random() * 3)];
     conf.style.borderRadius = '50%';
     conf.style.left = Math.random() * window.innerWidth + 'px';
@@ -777,7 +898,7 @@ function startVisualizer() {
   visualizerInterval = setInterval(() => {
     if (!musicPlaying) return;
     document.querySelectorAll('.visualizer-bar').forEach(bar => {
-      bar.style.height = Math.random() * 20 + 4 + 'px';
+      bar.style.height = Math.random() * 22 + 4 + 'px';
     });
   }, 100);
 }
@@ -808,14 +929,16 @@ function openInvitation() {
 envelopeCard.addEventListener('click', openInvitation);
 musicBtn.addEventListener('click', (e) => { e.stopPropagation(); if (!isOpened) openInvitation(); else toggleMusic(); });
 
-// COUNTDOWN
+// ========== COUNTDOWN ==========
 const targetDate = new Date("April 5, 2026 08:00:00").getTime();
 setInterval(() => {
   const now = new Date().getTime();
   const diff = targetDate - now;
   if (diff < 0) {
-    document.getElementById('days').innerText = '00'; document.getElementById('hours').innerText = '00';
-    document.getElementById('minutes').innerText = '00'; document.getElementById('seconds').innerText = '00';
+    document.getElementById('days').innerText = '00';
+    document.getElementById('hours').innerText = '00';
+    document.getElementById('minutes').innerText = '00';
+    document.getElementById('seconds').innerText = '00';
     return;
   }
   document.getElementById('days').innerText = Math.floor(diff / 86400000).toString().padStart(2,'0');
@@ -824,7 +947,7 @@ setInterval(() => {
   document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000).toString().padStart(2,'0');
 }, 1000);
 
-// VIRTUAL CANDLE
+// ========== VIRTUAL CANDLE ==========
 let candleCount = localStorage.getItem('candleCount') ? parseInt(localStorage.getItem('candleCount')) : 0;
 document.getElementById('candleCount').innerText = candleCount;
 document.getElementById('candleIcon').addEventListener('click', () => {
@@ -834,32 +957,70 @@ document.getElementById('candleIcon').addEventListener('click', () => {
   simpleConfetti();
 });
 
-// GALERI (SWIPE HORIZONTAL)
-const galleryImages = ["berdua.jpg", "cowo.jpg", "cewe.jpg", "berdua.jpg", "cowo.jpg", "cewe.jpg", "berdua.jpg"];
-const galleryScroll = document.getElementById('galleryScroll');
-galleryImages.forEach((src, idx) => {
-  const div = document.createElement('div');
-  div.className = 'scroll-item';
-  const img = document.createElement('img');
-  img.src = src;
-  img.className = 'gallery-photo';
-  img.onerror = () => img.src = 'https://placehold.co/400x400/2a2a2a/e5c890?text=Foto';
-  img.onclick = () => {
-    document.getElementById('lightboxImg').src = img.src;
-    document.getElementById('lightbox').classList.add('active');
-  };
-  div.appendChild(img);
-  galleryScroll.appendChild(div);
-});
+// ========== GALERI INSTAGRAM STYLE ==========
+const allGalleryImages = ["berdua.jpg", "cowo.jpg", "cewe.jpg", "berdua.jpg", "cowo.jpg", "cewe.jpg", "berdua.jpg", "cowo.jpg", "cewe.jpg"];
 
-// GUESTBOOK
+function renderInstagramGallery() {
+  const container = document.getElementById('instagramGallery');
+  if (!container) return;
+  
+  const mainImg = allGalleryImages[0];
+  const sideImgs = allGalleryImages.slice(1, 4);
+  const remainingImgs = allGalleryImages.slice(4);
+  
+  let html = `
+    <div class="instagram-grid">
+      <div class="instagram-main" onclick="openLightbox('${mainImg}')">
+        <img src="${mainImg}" onerror="this.src='https://placehold.co/400x400/2a2a2a/e5c890?text=Foto'">
+      </div>
+      <div class="instagram-side">
+  `;
+  
+  sideImgs.forEach(img => {
+    html += `
+      <div class="instagram-side-item" onclick="openLightbox('${img}')">
+        <img src="${img}" onerror="this.src='https://placehold.co/400x400/2a2a2a/e5c890?text=Foto'">
+      </div>
+    `;
+  });
+  
+  html += `</div></div>`;
+  
+  if (remainingImgs.length > 0) {
+    html += `<div class="gallery-horizontal">`;
+    remainingImgs.forEach(img => {
+      html += `
+        <div class="gallery-horizontal-item" onclick="openLightbox('${img}')">
+          <img src="${img}" onerror="this.src='https://placehold.co/400x400/2a2a2a/e5c890?text=Foto'">
+        </div>
+      `;
+    });
+    html += `</div>`;
+  }
+  
+  container.innerHTML = html;
+}
+
+function openLightbox(src) {
+  const lightboxImg = document.getElementById('lightboxImg');
+  lightboxImg.src = src;
+  document.getElementById('lightbox').classList.add('active');
+}
+window.openLightbox = openLightbox;
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+window.closeLightbox = closeLightbox;
+
+// ========== GUESTBOOK ==========
 let messages = [];
 function loadMessages() {
-  const saved = localStorage.getItem('wedding_messages_mobile');
+  const saved = localStorage.getItem('wedding_messages_final');
   if (saved) messages = JSON.parse(saved);
   else messages = [
     { name: "🌹 Keluarga Besar", msg: "Selamat menempuh hidup baru, semoga sakinah mawaddah warahmah! Barakallah." },
-    { name: "✨ Sahabat Sejati", msg: "Happy wedding! Langgeng selalu berdua 💕" }
+    { name: "✨ Sahabat Sejati", msg: "Happy wedding! Langgeng selalu berdua, jadi keluarga yang bahagia dunia akhirat 💕" }
   ];
   renderMessages();
 }
@@ -872,7 +1033,7 @@ function renderMessages() {
       <div class="guestbook-message">${escapeHtml(m.msg)}</div>
     </div>
   `).join('');
-  localStorage.setItem('wedding_messages_mobile', JSON.stringify(messages));
+  localStorage.setItem('wedding_messages_final', JSON.stringify(messages));
 }
 function escapeHtml(str) { return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
 function addMessage() {
@@ -888,7 +1049,7 @@ function addMessage() {
 window.addMessage = addMessage;
 window.copyText = (text) => { navigator.clipboard.writeText(text); alert('Berhasil disalin!'); };
 
-// QR CODE
+// ========== QR CODE ==========
 const qrModal = document.getElementById('qrModal');
 document.getElementById('showQrBtn')?.addEventListener('click', () => {
   const url = window.location.href;
@@ -905,14 +1066,14 @@ function downloadQR() {
 window.closeQR = closeQR;
 window.downloadQR = downloadQR;
 
-// CALENDAR
+// ========== CALENDAR ==========
 document.getElementById('calendarBtn')?.addEventListener('click', (e) => {
   e.preventDefault();
   const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('Pernikahan Fikri & Sindi')}&dates=20260405T080000/20260405T120000&details=${encodeURIComponent('Akad & Resepsi di Kediaman Mempelai Wanita')}&location=${encodeURIComponent('Kp. Cianca, Cisomang Barat, Bandung Barat')}&ctz=Asia/Jakarta`;
   window.open(url, '_blank');
 });
 
-// SCROLL REVEAL
+// ========== SCROLL REVEAL ==========
 const revealElements = document.querySelectorAll('.reveal');
 function checkReveal() {
   const windowHeight = window.innerHeight;
@@ -921,9 +1082,9 @@ function checkReveal() {
   });
 }
 window.addEventListener('scroll', checkReveal);
-window.addEventListener('load', () => { checkReveal(); loadMessages(); });
+window.addEventListener('load', () => { checkReveal(); loadMessages(); renderInstagramGallery(); });
 
-// NAVIGATION
+// ========== NAVIGATION ==========
 const sections = document.querySelectorAll('.section-card');
 const navLinks = document.querySelectorAll('.nav-link');
 function onScroll() {
@@ -949,12 +1110,9 @@ document.querySelectorAll('.nav-link').forEach(anchor => {
   });
 });
 
-// LIGHTBOX
-function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
-window.closeLightbox = closeLightbox;
-
-document.getElementById('imgPria')?.addEventListener('click', () => { document.getElementById('lightboxImg').src = 'cowo.jpg'; document.getElementById('lightbox').classList.add('active'); });
-document.getElementById('imgWanita')?.addEventListener('click', () => { document.getElementById('lightboxImg').src = 'cewe.jpg'; document.getElementById('lightbox').classList.add('active'); });
+// Foto mempelai lightbox
+document.getElementById('imgPria')?.addEventListener('click', () => openLightbox('cowo.jpg'));
+document.getElementById('imgWanita')?.addEventListener('click', () => openLightbox('cewe.jpg'));
 
 mainContent.style.display = 'none';
 document.body.style.overflow = 'hidden';
