@@ -266,57 +266,92 @@ body::before {
 .countdown-number { font-size: 2rem; font-weight: 700; color: #e8d29c; }
 .countdown-label { font-size: 10px; text-transform: uppercase; color: #b8a87a; }
 
-/* ========== FOTO ========== */
-.photo-square {
-  width: 170px;
-  height: 170px;
+/* ========== FOTO MEMPELAI - HORIZONTAL & BESAR ========== */
+.couple-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 25px;
+}
+
+.couple-card {
+  flex: 1;
+  min-width: 220px;
+  text-align: center;
+}
+
+.photo-large {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 32px;
   cursor: pointer;
   border: 2px solid rgba(212, 175, 55, 0.5);
-  transition: all 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
-.photo-square:hover { transform: scale(1.03); border-color: #e5c890; }
 
-/* ========== GALERI DENGAN SLIDESHOW ========== */
-.gallery-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-  flex-wrap: wrap;
-  gap: 10px;
+.photo-large:hover {
+  transform: scale(1.02);
+  border-color: #e5c890;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4);
 }
-.slideshow-controls {
-  display: flex;
-  gap: 8px;
-}
-.slideshow-btn {
-  background: rgba(30, 30, 40, 0.6);
-  border: 0.5px solid rgba(212, 175, 55, 0.5);
-  padding: 6px 12px;
-  border-radius: 30px;
-  font-size: 11px;
-  cursor: pointer;
-  color: #e5c890;
-  transition: 0.2s;
-}
-.slideshow-btn:hover { background: #e5c890; color: #1a1a1a; }
-.gallery-grid {
+
+/* ========== GALERI MASONRY (Instagram/TikTok Style) ========== */
+.gallery-masonry {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 20px;
 }
-.gallery-img {
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  border-radius: 28px;
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
   cursor: pointer;
-  transition: 0.3s;
-  border: 0.5px solid rgba(212, 175, 55, 0.35);
+  transition: all 0.3s ease;
 }
-.gallery-img:hover { transform: scale(1.02); border-color: #e5c890; }
+
+.gallery-item:hover {
+  transform: scale(1.02);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Ukuran berbeda untuk efek masonry */
+.gallery-item.span-2 {
+  grid-column: span 2;
+}
+
+.gallery-item.span-2-row {
+  grid-row: span 2;
+}
+
+.gallery-item.tall {
+  aspect-ratio: 1 / 1.2;
+}
+
+.gallery-item.wide {
+  aspect-ratio: 1.6 / 1;
+}
+
+.gallery-item.square {
+  aspect-ratio: 1 / 1;
+}
 
 /* ========== VIRTUAL CANDLE ========== */
 .candle-section {
@@ -382,7 +417,7 @@ body::before {
 }
 .guestbook-input button:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(212, 175, 55, 0.3); }
 
-/* ========== AMPLOP DIGITAL (MULTI BANK) ========== */
+/* ========== AMPLOP DIGITAL ========== */
 .gift-box {
   display: flex;
   flex-wrap: wrap;
@@ -411,7 +446,7 @@ body::before {
   color: #e5c890;
 }
 
-/* ========== VISUALIZER MUSIK ========== */
+/* ========== VISUALIZER ========== */
 .visualizer {
   position: fixed;
   bottom: 90px;
@@ -449,7 +484,7 @@ body::before {
   font-size: 24px;
 }
 
-/* ========== QR CODE SECTION ========== */
+/* ========== QR CODE ========== */
 .qr-section {
   margin-top: 15px;
   text-align: center;
@@ -515,9 +550,10 @@ body::before {
 }
 
 @media (max-width: 550px) {
-  .photo-square { width: 140px; height: 140px; }
+  .couple-horizontal { gap: 25px; }
+  .photo-large { max-width: 180px; }
+  .gallery-masonry { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .countdown-number { font-size: 1.5rem; }
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -571,7 +607,7 @@ body::before {
     </div>
   </div>
 
-  <!-- AYAT, HADIS, DOA & MUTIARA (LENGKAP) -->
+  <!-- AYAT, HADIS, DOA & MUTIARA -->
   <div class="section-card">
     <div class="glass-card reveal" style="padding:28px;">
       <div style="text-align:center; margin-bottom:18px;">
@@ -618,32 +654,35 @@ body::before {
     </div>
   </div>
 
-  <!-- MEMPELAI -->
+  <!-- MEMPELAI - HORIZONTAL & BESAR -->
   <div class="section-card" id="couple">
     <div class="glass-card reveal" style="padding:28px; text-align:center;">
       <h3 class="gold-text">🌿 Mempelai 🌿</h3>
-      <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:35px; margin-top:20px;">
-        <div><img src="cowo.jpg" class="photo-square" id="imgPria"><h3 class="gold-text" style="margin-top:14px;">Fikri Anugrah R.</h3><p>Putra Bapak Heri Nugraha & Ibu Nurhayati</p></div>
-        <div><img src="cewe.jpg" class="photo-square" id="imgWanita"><h3 class="gold-text" style="margin-top:14px;">Sindi Rosmiati</h3><p>Putri Bapak Enjang Supriyadi & Ibu Elis Herawati</p></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- GALERI DENGAN SLIDESHOW -->
-  <div class="section-card" id="gallery">
-    <div class="glass-card reveal" style="padding:28px;">
-      <div class="gallery-header">
-        <h3 class="gold-text">🌸 Galeri Kenangan</h3>
-        <div class="slideshow-controls">
-          <button class="slideshow-btn" id="slideshowPlayPause">⏸ Pause</button>
+      <div class="couple-horizontal">
+        <div class="couple-card">
+          <img src="cowo.jpg" class="photo-large" id="imgPria">
+          <h3 class="gold-text" style="margin-top:16px;">Fikri Anugrah R.</h3>
+          <p>Putra Bapak Heri Nugraha & Ibu Nurhayati</p>
+        </div>
+        <div class="couple-card">
+          <img src="cewe.jpg" class="photo-large" id="imgWanita">
+          <h3 class="gold-text" style="margin-top:16px;">Sindi Rosmiati</h3>
+          <p>Putri Bapak Enjang Supriyadi & Ibu Elis Herawati</p>
         </div>
       </div>
-      <div class="gallery-grid" id="galleryGrid"></div>
-      <p style="text-align:center; font-size:11px; margin-top:14px;">Klik foto untuk memperbesar | Slideshow otomatis 3 detik</p>
     </div>
   </div>
 
-  <!-- AMPLOP DIGITAL MULTI BANK -->
+  <!-- GALERI MASONRY (Instagram/TikTok Style) -->
+  <div class="section-card" id="gallery">
+    <div class="glass-card reveal" style="padding:28px;">
+      <h3 class="gold-text" style="text-align:center;">🌸 Galeri Kenangan</h3>
+      <div class="gallery-masonry" id="galleryGrid"></div>
+      <p style="text-align:center; font-size:11px; margin-top:16px;">Klik foto untuk memperbesar</p>
+    </div>
+  </div>
+
+  <!-- AMPLOP DIGITAL -->
   <div class="section-card" id="gift">
     <div class="glass-card reveal" style="padding:28px;">
       <h3 class="gold-text" style="text-align:center;">🎁 Amplop Digital</h3>
@@ -669,7 +708,7 @@ body::before {
     </div>
   </div>
 
-  <!-- LOKASI + QR CODE -->
+  <!-- LOKASI -->
   <div class="section-card" id="location">
     <div class="glass-card reveal" style="padding:28px; text-align:center;">
       <h3 class="gold-text">📍 Lokasi Acara</h3>
@@ -680,7 +719,6 @@ body::before {
       <p style="margin-top:15px; font-size:11px;"><strong>Petunjuk Arah:</strong><br>Dari Bandung ambil jalur Cikalong Wetan, setelah SPBU belok kanan ke Cisomang, ikuti jalan 2km, lokasi samping Masjid Al-Ikhlas.</p>
       <a href="#" id="calendarBtn" class="btn-custom">📅 Simpan ke Google Calendar</a>
       
-      <!-- QR CODE SECTION -->
       <div class="qr-section">
         <button class="qr-btn" id="showQrBtn">📱 Download QR Undangan</button>
       </div>
@@ -702,7 +740,7 @@ body::before {
 
 <div class="lightbox" id="lightbox" onclick="closeLightbox()"><img id="lightboxImg" src=""></div>
 
-<!-- VISUALIZER MUSIK -->
+<!-- VISUALIZER -->
 <div class="visualizer" id="visualizer"></div>
 <audio id="weddingAudio" loop><source src="musik.mp3" type="audio/mpeg"></audio>
 <div class="music-player" id="musicBtn">🎵</div>
@@ -717,9 +755,7 @@ const preloaderInterval = setInterval(() => {
   if (progress >= 100) {
     progress = 100;
     clearInterval(preloaderInterval);
-    setTimeout(() => {
-      preloader.classList.add('hide');
-    }, 500);
+    setTimeout(() => { preloader.classList.add('hide'); }, 500);
   }
   progressBar.style.width = Math.min(progress, 100) + '%';
 }, 200);
@@ -768,12 +804,8 @@ function playMusic() {
   audioEl.play().then(() => {
     let vol = 0;
     const interval = setInterval(() => {
-      if (vol < 0.5) {
-        vol += 0.05;
-        audioEl.volume = vol;
-      } else {
-        clearInterval(interval);
-      }
+      if (vol < 0.5) { vol += 0.05; audioEl.volume = vol; }
+      else clearInterval(interval);
     }, 80);
     musicPlaying = true;
     musicBtn.innerHTML = "🎶";
@@ -784,7 +816,7 @@ function playMusic() {
   });
 }
 
-// ========== VISUALIZER ==========
+// VISUALIZER
 const visualizer = document.getElementById('visualizer');
 let visualizerInterval;
 function startVisualizer() {
@@ -799,28 +831,18 @@ function startVisualizer() {
   visualizerInterval = setInterval(() => {
     if (!musicPlaying) return;
     document.querySelectorAll('.visualizer-bar').forEach(bar => {
-      const height = Math.random() * 24 + 4;
-      bar.style.height = height + 'px';
+      bar.style.height = Math.random() * 24 + 4 + 'px';
     });
   }, 100);
 }
 function stopVisualizer() {
   if (visualizerInterval) clearInterval(visualizerInterval);
-  if (visualizer) {
-    visualizer.classList.remove('active');
-    visualizer.innerHTML = '';
-  }
+  if (visualizer) { visualizer.classList.remove('active'); visualizer.innerHTML = ''; }
 }
 
 function toggleMusic() {
-  if (audioEl.paused) {
-    playMusic();
-  } else {
-    audioEl.pause();
-    musicPlaying = false;
-    musicBtn.innerHTML = "🎵";
-    stopVisualizer();
-  }
+  if (audioEl.paused) { playMusic(); }
+  else { audioEl.pause(); musicPlaying = false; musicBtn.innerHTML = "🎵"; stopVisualizer(); }
 }
 
 function openInvitation() {
@@ -840,11 +862,8 @@ function openInvitation() {
 envelopeCard.addEventListener('click', openInvitation);
 musicBtn.addEventListener('click', function(e) {
   e.stopPropagation();
-  if (!isOpened) {
-    openInvitation();
-  } else {
-    toggleMusic();
-  }
+  if (!isOpened) openInvitation();
+  else toggleMusic();
 });
 
 // ========== COUNTDOWN ==========
@@ -875,66 +894,38 @@ document.getElementById('candleIcon').addEventListener('click', () => {
   simpleConfetti();
 });
 
-// ========== GALERI + SLIDESHOW ==========
-const galleryImages = ["berdua.jpg", "cowo.jpg", "cewe.jpg", "berdua.jpg", "cowo.jpg", "cewe.jpg"];
-const galleryGrid = document.getElementById('galleryGrid');
-let slideshowInterval;
-let slideshowActive = true;
+// ========== GALERI MASONRY (Instagram/TikTok Style) ==========
+const galleryData = [
+  { src: "berdua.jpg", size: "wide", class: "wide" },
+  { src: "cowo.jpg", size: "square", class: "square" },
+  { src: "cewe.jpg", size: "square", class: "square" },
+  { src: "berdua.jpg", size: "tall", class: "tall" },
+  { src: "cowo.jpg", size: "square", class: "square" },
+  { src: "cewe.jpg", size: "wide", class: "wide" },
+  { src: "berdua.jpg", size: "square", class: "square" },
+  { src: "cowo.jpg", size: "tall", class: "tall" },
+  { src: "cewe.jpg", size: "square", class: "square" }
+];
 
-function renderGallery() {
+const galleryGrid = document.getElementById('galleryGrid');
+function renderMasonryGallery() {
   galleryGrid.innerHTML = '';
-  galleryImages.forEach((src, idx) => {
+  galleryData.forEach((item, idx) => {
+    const div = document.createElement('div');
+    div.className = `gallery-item ${item.class}`;
     const img = document.createElement('img');
-    img.src = src;
-    img.className = 'gallery-img';
+    img.src = item.src;
+    img.alt = `Galeri ${idx+1}`;
     img.onerror = () => img.src = 'https://placehold.co/400x400/2a2a2a/e5c890?text=Foto';
     img.onclick = () => {
       document.getElementById('lightboxImg').src = img.src;
       document.getElementById('lightbox').classList.add('active');
     };
-    galleryGrid.appendChild(img);
+    div.appendChild(img);
+    galleryGrid.appendChild(div);
   });
 }
-
-function startSlideshow() {
-  if (slideshowInterval) clearInterval(slideshowInterval);
-  let currentIdx = 0;
-  slideshowInterval = setInterval(() => {
-    if (!slideshowActive) return;
-    const imgs = document.querySelectorAll('.gallery-img');
-    if (imgs.length && currentIdx < imgs.length) {
-      imgs[currentIdx].style.transform = 'scale(1.02)';
-      setTimeout(() => { if(imgs[currentIdx]) imgs[currentIdx].style.transform = ''; }, 200);
-      currentIdx = (currentIdx + 1) % imgs.length;
-    }
-  }, 3000);
-}
-
-document.getElementById('slideshowPlayPause')?.addEventListener('click', () => {
-  slideshowActive = !slideshowActive;
-  document.getElementById('slideshowPlayPause').innerHTML = slideshowActive ? "⏸ Pause" : "▶ Play";
-});
-
-renderGallery();
-startSlideshow();
-
-// ========== QR CODE ==========
-const qrModal = document.getElementById('qrModal');
-document.getElementById('showQrBtn')?.addEventListener('click', () => {
-  const url = window.location.href;
-  const qrImg = document.getElementById('qrCodeImg');
-  qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
-  qrModal.classList.add('active');
-});
-function closeQR() { qrModal.classList.remove('active'); }
-function downloadQR() {
-  const link = document.createElement('a');
-  link.download = 'qr-undangan.png';
-  link.href = document.getElementById('qrCodeImg').src;
-  link.click();
-}
-window.closeQR = closeQR;
-window.downloadQR = downloadQR;
+renderMasonryGallery();
 
 // ========== GUESTBOOK ==========
 let messages = [];
@@ -971,6 +962,23 @@ function addMessage() {
 }
 window.addMessage = addMessage;
 window.copyText = (text) => { navigator.clipboard.writeText(text); alert('Berhasil disalin!'); };
+
+// ========== QR CODE ==========
+const qrModal = document.getElementById('qrModal');
+document.getElementById('showQrBtn')?.addEventListener('click', () => {
+  const url = window.location.href;
+  document.getElementById('qrCodeImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
+  qrModal.classList.add('active');
+});
+function closeQR() { qrModal.classList.remove('active'); }
+function downloadQR() {
+  const link = document.createElement('a');
+  link.download = 'qr-undangan.png';
+  link.href = document.getElementById('qrCodeImg').src;
+  link.click();
+}
+window.closeQR = closeQR;
+window.downloadQR = downloadQR;
 
 // ========== CALENDAR ==========
 document.getElementById('calendarBtn')?.addEventListener('click', (e) => {
